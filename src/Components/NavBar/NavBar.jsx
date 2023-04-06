@@ -14,6 +14,7 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/solid'
 import './NavBar.css'
 import { Link as Anchor, useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion'
 
 const products = [
   { name: 'Design', description: 'Get a better understanding of your traffic', href: '/design', icon: PencilSquareIcon },
@@ -103,13 +104,22 @@ export default function NavBar() {
           </Popover>
 
           <Anchor to="/colors-textures" className="text-sm font-semibold leading-6 text-gray-900">
-          Colors and Textures
+            <motion.p     
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}>Colors and Textures
+            </motion.p>
           </Anchor>
           <Anchor to="/contact" className="text-sm font-semibold leading-6 text-gray-900">
-          Contact
+            <motion.p     
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}>Contact
+            </motion.p>
           </Anchor>
           <Anchor to="/company" className="text-sm font-semibold leading-6 text-gray-900">
-            Company
+            <motion.p     
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}>Company
+            </motion.p>
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -118,14 +128,22 @@ export default function NavBar() {
           </Anchor>
         </div>
       </nav>
+
+
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-10" />
+        <motion.div
+            className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'
+          initial={{  x: 300 }}
+          animate={{  x: 0 }}
+          transition={{duration:0.5}}
+        >
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Anchor to="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
-                className="logo"
+                className="logo2"
                 src={require("../../Media/logo.png")}
                 alt=""
               />
@@ -197,6 +215,7 @@ export default function NavBar() {
             </div>
           </div>
         </Dialog.Panel>
+        </motion.div>
       </Dialog>
     </header>
   )
