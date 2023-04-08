@@ -1,16 +1,18 @@
 import React from 'react'
-import Slider from '../../Components/Slider/Slider.jsx'
-import ProductDetailG from '../../Components/ProductDetailG/ProductDetailG.jsx'
-import ProductDetail from '../../Components/ProductDetail/ProductDetail.jsx'
-
+import Footer from '../../Components/Footer/Footer'
+import ProductDetail from '../../Components/ProductDetail/ProductDetail'
+//import ProductDetailG from '../../Components/ProductDetailG/ProductDetailG'
 
 export default function Product() {
  
   return (
-    <div>
-         <Slider />  
-         <ProductDetailG />
-         <ProductDetail />
+    <div> 
+      <h2>PAGE PRODUCT</h2>
+      <ProductDetail />
+     {/*  <ProductDetailG /> */}
+
+       <Footer /> 
+     
     </div>
   )
 }

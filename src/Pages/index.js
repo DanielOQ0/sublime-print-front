@@ -4,6 +4,7 @@ import NotFound from "./NotFound/NotFound";
 import AdminLayout from "../Layouts/AdminLayout/AdminlLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
+import Product from "./Product/Product"
 
 
 export const router = createBrowserRouter([
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
             element: <Home/>,
           },
         ]
+      },
+      {
+        path: "/product",
+        element: <Product/>,
       },
       {
         path: "/*",
