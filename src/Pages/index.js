@@ -8,29 +8,24 @@ import Home from "./Home/Home";
 
 export const router = createBrowserRouter([
   {
-    path: "/admin",
-    element: <AdminLayout />,
+    path: "/admin",element: <AdminLayout />,
     children: [
 
     ],
   },
   {
-    path: "/",
-    element: <MainLayout />,
+    path: "/",element: <MainLayout />,
     children: [
       {
-        path: "/",
-        element: <ProtectedRouter expectedRole="visitor"/>,
+        path: "/",element: <ProtectedRouter expectedRole="visitor"/>,
         children:[
           {
-            path: "/",
-            element: <Home/>,
+            path: "/",element: <Home/>,
           },
         ]
       },
       {
-        path: "/*",
-        element: <NotFound />,
+        path: "/*",element: <NotFound />,
       },
     ],
   },
