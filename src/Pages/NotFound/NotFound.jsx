@@ -7,7 +7,6 @@ export default function NotFound() {
     <>
       {/*
         This example requires updating your template:
-
         ```
         <html class="h-full">
         <body class="h-full">
