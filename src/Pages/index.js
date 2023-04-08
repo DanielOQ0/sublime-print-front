@@ -4,7 +4,7 @@ import NotFound from "./NotFound/NotFound";
 import AdminLayout from "../Layouts/AdminLayout/AdminlLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
-import Product from "./Product/Product"
+import Store from "./Store/Store";
 
 
 export const router = createBrowserRouter([
@@ -27,11 +27,23 @@ export const router = createBrowserRouter([
             path: "/",
             element: <Home/>,
           },
-        ]
-      },
-      {
-        path: "/product",
-        element: <Product/>,
+          {
+            path: "/store",
+            element: <Store/>,
+          },
+          {
+            path: "/company",
+            element: <Store/>,
+          },
+          {
+            path: "/contact",
+            element: <Store/>,
+          },
+          {
+            path: "/colors-textures",
+            element: <Store/>,
+          },
+        ],
       },
       {
         path: "/*",
