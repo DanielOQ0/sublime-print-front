@@ -2,8 +2,9 @@ import React from "react";
 import './mainLayout.css';
 import { Outlet } from "react-router-dom";
 import Footer from '../../Components/Footer/Footer';
-import Product from '../../Components/ProductDetail/ProductDetail'
+//import Product from '../../Components/ProductDetail/ProductDetail'
 import Slider from '../../Components/Slider/Slider'
+
 
 export default function () {
   return (
@@ -11,7 +12,8 @@ export default function () {
         
         <Outlet className="main"/>
         <Slider />
-        <Product />
+        
+      
 
         <Footer className="footer"/>
     </div>
