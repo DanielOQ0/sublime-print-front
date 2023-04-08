@@ -28,7 +28,6 @@ export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress)
-  console.log(scrollYProgress);
 
   return (
     <header className="header z-10">
