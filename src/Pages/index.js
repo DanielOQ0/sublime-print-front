@@ -5,27 +5,24 @@ import AdminLayout from "../Layouts/AdminLayout/AdminlLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
+import Register from "./Register/Register";
 
 
 export const router = createBrowserRouter([
   {
-    path: "/admin",
-    element: <AdminLayout />,
+    path: "/admin",element: <AdminLayout />,
     children: [
 
     ],
   },
   {
-    path: "/",
-    element: <MainLayout />,
+    path: "/",element: <MainLayout />,
     children: [
       {
-        path: "/",
-        element: <ProtectedRouter expectedRole="visitor"/>,
+        path: "/",element: <ProtectedRouter expectedRole="visitor"/>,
         children:[
           {
-            path: "/",
-            element: <Home/>,
+            path: "/",element: <Home/>,
           },
           {
             path: "/store",
@@ -43,11 +40,12 @@ export const router = createBrowserRouter([
             path: "/colors-textures",
             element: <Store/>,
           },
+          { path: "/signup", element: <Register />},
+        
         ],
       },
       {
-        path: "/*",
-        element: <NotFound />,
+        path: "/*",element: <NotFound />,
       },
     ],
   },
