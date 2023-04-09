@@ -4,6 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { StarIcon } from '@heroicons/react/20/solid'
 import detailsAction from "../../Store/Details/actions";
 import { useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 
 const { captureDetails } = detailsAction;
 
@@ -36,16 +37,31 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Details({init=false}) {
+export default function Details({}) {
 
   const dispatch = useDispatch()
-  const [open, setOpen] = useState(init)
+  const [open, setOpen] = useState(true)
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-
+  
+    if(!open){
+      setTimeout(() => {
+        dispatch(captureDetails({details:false}))
+      }, 500);
+      
+    }
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
+        <motion.div
+         initial={{  opacity: 0, }}
+         animate={{  opacity: 1, }}
+         transition={{
+          duration:0.5,
+          type: "spring",
+          stiffness: 260,
+          damping: 20}}
+        >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -76,7 +92,6 @@ export default function Details({init=false}) {
                     className="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-8 lg:top-8"
                     onClick={() => {
                       setOpen(false)
-                      dispatch(captureDetails({details:false}))
                     }}
                   >
                     <span className="sr-only">Close</span>
@@ -241,6 +256,7 @@ export default function Details({init=false}) {
             </Transition.Child>
           </div>
         </div>
+        </motion.div>
       </Dialog>
     </Transition.Root>
   )
