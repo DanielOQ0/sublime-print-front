@@ -6,6 +6,8 @@ import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
 import Company from './Company/Company';
+import Register from './Register/Register'
+import Login from './Login/Login'
 
 
 export const router = createBrowserRouter([
@@ -49,6 +51,14 @@ export const router = createBrowserRouter([
       {
         path: "/company",
         element: <Company/>,
+      },
+      {
+        path: "/register",
+        element: <Register/>,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
       },
       {
         path: "/*",

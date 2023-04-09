@@ -4,6 +4,7 @@ import Banner2 from '../../Components/BannerCompany/Banner2'
 import Banner3 from '../../Components/BannerCompany/Banner3'
 import Banner4 from '../../Components/BannerCompany/Banner4'
 //import Banner5 from '../../Components/BannerCompany/Banner5'
+import Footer from '../../Components/Footer/Footer'
 
 export default function Company() {
   return (
@@ -13,6 +14,7 @@ export default function Company() {
         <Banner3 />
         <Banner4 />
         {/* <Banner5 /> */}
+        <Footer />
        
        
     </div>
