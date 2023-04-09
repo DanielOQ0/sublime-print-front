@@ -8,6 +8,7 @@ module.exports = {
   },
   plugins: [
     '@tailwindcss/aspect-ratio',
+    '@tailwindcss/forms',
   ],
 }
 
