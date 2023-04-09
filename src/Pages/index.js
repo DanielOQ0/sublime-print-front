@@ -5,6 +5,7 @@ import AdminLayout from "../Layouts/AdminLayout/AdminlLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
+import Register from "./Register/Register";
 
 
 export const router = createBrowserRouter([
@@ -39,6 +40,8 @@ export const router = createBrowserRouter([
             path: "/colors-textures",
             element: <Store/>,
           },
+          { path: "/signup", element: <Register />},
+        
         ],
       },
       {

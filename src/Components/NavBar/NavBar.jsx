@@ -120,7 +120,7 @@ export default function NavBar() {
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Anchor to="login" className="text-sm font-semibold leading-6 text-gray-900">
+          <Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900">
             Log in <span aria-hidden="true">&rarr;</span>
           </Anchor>
         </div>
