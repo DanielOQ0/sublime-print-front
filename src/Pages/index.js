@@ -5,6 +5,7 @@ import AdminLayout from "../Layouts/AdminLayout/AdminlLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
+import Company from './Company/Company';
 
 
 export const router = createBrowserRouter([
@@ -31,10 +32,10 @@ export const router = createBrowserRouter([
             path: "/store",
             element: <Store/>,
           },
-          {
+          /* {
             path: "/company",
-            element: <Store/>,
-          },
+            element: <Company/>,
+          }, */
           {
             path: "/contact",
             element: <Store/>,
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
             element: <Store/>,
           },
         ],
+      },
+      {
+        path: "/company",
+        element: <Company/>,
       },
       {
         path: "/*",
