@@ -10,6 +10,7 @@ import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/react/20/
 import './NavBar.css'
 import { Link as Anchor, useNavigate } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
+import Cart from '../Cart/Cart'
 
 const products = [
   { name: 'Design', description: 'Get a better understanding of your traffic', href: '/design', icon: PencilSquareIcon },
@@ -120,10 +121,12 @@ export default function NavBar() {
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Anchor to="login" className="text-sm font-semibold leading-6 text-gray-900">
+          <Anchor to="login" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-2">
             Log in <span aria-hidden="true">&rarr;</span>
           </Anchor>
+          <Cart/>
         </div>
+        
       </nav>
 
 
@@ -209,6 +212,7 @@ export default function NavBar() {
                 >
                   Log in
                 </Anchor>
+                <Cart/>
               </div>
             </div>
           </div>
