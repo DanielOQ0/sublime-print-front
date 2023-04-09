@@ -121,8 +121,8 @@ export default function NavBar() {
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Anchor to="login" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-2">
-            Log in <span aria-hidden="true">&rarr;</span>
+          <Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
+            Sing up <span aria-hidden="true">&rarr;</span>
           </Anchor>
           <Cart/>
         </div>
@@ -207,10 +207,10 @@ export default function NavBar() {
               </div>
               <div className="py-6">
                 <Anchor
-                  href="/login"
+                  to="/signup"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Log in
+                  Sign up
                 </Anchor>
                 <Cart/>
               </div>
