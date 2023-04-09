@@ -39,10 +39,7 @@ export default function SignUp() {
     <div>
         <div class="bg-grey-lighter min-h-screen flex flex-col">
             <div class="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <motion.div
-                    initial={{y:200}}
-                    animate={{y:0, duration:2}}
-                 class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                <div class="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 class="mb-8 text-3xl text-center">Sign up</h1>
                     <form onSubmit={handleSubmit}>
                         <input 
@@ -83,7 +80,7 @@ export default function SignUp() {
                             Privacy Policy
                         </a>
                     </div>
-                </motion.div>
+                </div>
                 <div class="text-grey-dark mt-6">
                     Already have an account? 
                     <a class="no-underline border-b border-blue text-blue" href="../login/">
