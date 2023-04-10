@@ -1,11 +1,13 @@
 import React from 'react'
 import './footer.css'
 import logo from '../../Media/logo.png'
-import { Link as Anchor } from "react-router-dom";
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Footer() {
   return (
     <footer >
+        <script src="https://kit.fontawesome.com/c0e858ad48.js" crossOrigin="anonymous"></script>
+       
         <div className="footer-container">
         <div className="footer-info">
             
