@@ -7,9 +7,9 @@ import Home from "./Home/Home";
 import Store from "./Store/Store";
 import SignUp from "../Components/SignUp/SignUp";
 import Company from "./Company/Company";
+import Contact from "./Contact/Contact"
+import ColorsTextures from "./ColorsTextures/ColorsTextures"
 import LogIn from "../Components/LogIn/LogIn";
-
-
 
 export const router = createBrowserRouter([
   {
@@ -37,17 +37,17 @@ export const router = createBrowserRouter([
           }, 
           {
             path: "/contact",
-            element: <NotFound />,
+            element: <Contact />,
           },
           {
             path: "/colors-textures",
-            element: <NotFound />,
+            element: <ColorsTextures />,
           },
           { path: "/signup", element: <SignUp />},
           { path: "/login", element: <LogIn />},
         
         ],
-      },
+      }, 
       {
         path: "/*",element: <NotFound />,
       },
