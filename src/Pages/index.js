@@ -6,7 +6,7 @@ import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
 import Register from "./Register/Register";
-import Company from "./Company/Company";
+import Company1 from "./Company1/Company1";
 
 
 export const router = createBrowserRouter([
@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/company",
-        element: <Company/>,
+        element: <Company1/>,
       },
       {
         path: "/*",element: <NotFound />,
