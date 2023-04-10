@@ -1,4 +1,4 @@
-import { Fragment, useState, React } from 'react'
+import { Fragment, useState, React, useEffect } from 'react'
 import './Store.css'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import detailsAction from "../../Store/Details/actions";
 import Details from '../../Components/Details/Details';
 import { motion } from 'framer-motion';
+import axios from 'axios'
 
 
 const { captureDetails } = detailsAction;
@@ -23,29 +24,23 @@ const container = {
         staggerChildren: 0.2
       }
     }
-  };
+};
   
-  const item = {
+const item = {
     hidden: { y: 20, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1
     }
-  };
+};
 //Filtros
-const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Best Rating', href: '#', current: false },
+  const sortOptions = [
+    { name: 'Best Rating', href: '#', current: true },
     { name: 'Newest', href: '#', current: false },
     { name: 'Price: Low to High', href: '#', current: false },
     { name: 'Price: High to Low', href: '#', current: false },
   ]
   const subCategories = [
-    { name: 'Totes', href: '#' },
-    { name: 'Backpacks', href: '#' },
-    { name: 'Travel Bags', href: '#' },
-    { name: 'Hip Bags', href: '#' },
-    { name: 'Laptop Sleeves', href: '#' },
   ]
   const filters = [
     {
@@ -54,7 +49,7 @@ const sortOptions = [
       options: [
         { value: 'white', label: 'White', checked: false },
         { value: 'beige', label: 'Beige', checked: false },
-        { value: 'blue', label: 'Blue', checked: true },
+        { value: 'blue', label: 'Blue', checked: false },
         { value: 'brown', label: 'Brown', checked: false },
         { value: 'green', label: 'Green', checked: false },
         { value: 'purple', label: 'Purple', checked: false },
@@ -64,23 +59,28 @@ const sortOptions = [
       id: 'category',
       name: 'Category',
       options: [
-        { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-        { value: 'sale', label: 'Sale', checked: false },
-        { value: 'travel', label: 'Travel', checked: true },
-        { value: 'organization', label: 'Organization', checked: false },
-        { value: 'accessories', label: 'Accessories', checked: false },
+        { value: 'Shirts', label: 'Shirts', checked: false },
+        { value: 'Pack', label: 'Pack', checked: false },
+        { value: 'Mug', label: 'Mug', checked: false },
+        { value: 'Cap', label: 'Cap', checked: false },
+        { value: 'Keychain', label: 'Keychain', checked: false },
+        { value: 'Outfit Pack', label: 'Outfit Pack', checked: false },
+        { value: 'Mousepad', label: 'Mousepad', checked: false },
+        { value: 'Water Bottle', label: 'Water Bottle', checked: false },
+        { value: 'Backpack', label: 'Backpack', checked: false },
       ],
     },
     {
       id: 'size',
       name: 'Size',
       options: [
-        { value: '2l', label: '2L', checked: false },
-        { value: '6l', label: '6L', checked: false },
-        { value: '12l', label: '12L', checked: false },
-        { value: '18l', label: '18L', checked: false },
-        { value: '20l', label: '20L', checked: false },
-        { value: '40l', label: '40L', checked: true },
+        { value: 'XS', label: 'XS', checked: false },
+        { value: 'S', label: 'S', checked: false },
+        { value: 'M', label: 'M', checked: false },
+        { value: 'L', label: 'L', checked: false },
+        { value: 'XL', label: 'XL', checked: false },
+        { value: 'XXl', label: 'XXL', checked: false },
+        { value: 'XXXl', label: 'XXXL', checked: false },
       ],
     },
   ]
@@ -88,37 +88,29 @@ const sortOptions = [
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
+
 //Producto de prueba
-  const products = [
-    {
-        id: 1,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 2,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-]
+let products=[]
+let product ={}
 
 export default function Store() {
-
+    const [render,setRender] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const dispatch = useDispatch()
     let openDetails = useSelector(store=>store.details.details)
-    
+
+    useEffect(()=>{
+      axios.get("http://localhost:8080/api/products?page=1&quantity=6")
+      .then((res)=>{
+        products=res.data.products
+        setRender(!render)
+      })
+      .catch((error)=>console.log(error))
+      
+    },[])
     
     function handleProduct(e){
-        let product = products.find(each=>{return each.id===parseInt(e.target.id)})
+        product = products.find(each=>{ return each._id===e.target.id})
         if(product){
             dispatch(captureDetails({details:true,product:product}))
         }
@@ -361,16 +353,16 @@ export default function Store() {
                 initial="hidden"
                 animate="visible"
                 >
-                    {products.map((product) => (
+                    {products?.map((product) => (
                         <motion.li 
                         variants={item}
-                        key={product.id} 
+                        key={product._id} 
                         className='containerProductCard'>
                             <ProductCard product={product}/>
                         </motion.li>
                     ))}
                 </motion.ul>
-                {openDetails?<Details/>:null}
+                {openDetails?<Details product={product}/>:null}
               </div>
             </div>
           </section>
