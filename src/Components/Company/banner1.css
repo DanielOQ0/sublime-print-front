@@ -1,0 +1,38 @@
+.splash1 {
+    background-image: url("https://image.spreadshirtmedia.net/content/f_auto,q_auto/c_fill,ar_1270:600/w_1680/v1592898987/CMS/CYO/businessBuyers/Business_Teaser_ES");
+    object-fit: cover;
+    color: #fff;
+    width: 100vw;
+    height: 100vh;
+}
+  
+.splash1 .container1 {
+ padding: 10rem;
+ min-width: 100vw;
+ min-height: 100vh;
+}
+  
+.lead1{
+    margin: 0 auto;
+    padding-top: 1rem;
+    font-size: 1.4em;
+    max-width: 796px;
+    height: 20rem;
+    font-weight: 800;
+    
+}
+
+@media (min-width:425px) and (max-width:767px) {
+    .splash1 .container1 {
+        padding: 1.5rem;
+        min-width: 100vw;
+        min-height: 100vh;
+       }
+
+    .lead1{
+        margin: 0 auto;
+        font-size: 1.3rem;
+        width: 90%;
+        height: 20rem;
+    }
+}
