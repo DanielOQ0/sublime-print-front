@@ -8,42 +8,17 @@ import { motion } from 'framer-motion';
 
 const { captureDetails } = detailsAction;
 
-const product = {
-  name: 'Basic Tee 6-Pack ',
-  price: '$192',
-  rating: 3.9,
-  reviewCount: 117,
-  href: '#',
-  imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-  imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
-  colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  sizes: [
-    { name: 'XXS', inStock: true },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: 'XXL', inStock: true },
-    { name: 'XXXL', inStock: false },
-  ],
-}
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Details({}) {
+export default function Details({product}) {
 
   const dispatch = useDispatch()
   const [open, setOpen] = useState(true)
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
   const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-  
+
     if(!open){
       setTimeout(() => {
         dispatch(captureDetails({details:false}))
@@ -100,7 +75,7 @@ export default function Details({}) {
 
                   <div className="grid w-full grid-cols-1 items-start gap-x-6 gap-y-8 sm:grid-cols-12 lg:gap-x-8">
                     <div className="aspect-h-3 aspect-w-2 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                      <img src={product.imageSrc} alt={product.imageAlt} className="object-cover object-center" />
+                      <img src={product.image} alt={"image "+product.name} className="object-cover object-center" />
                     </div>
                     <div className="sm:col-span-8 lg:col-span-7">
                       <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.name}</h2>
@@ -110,7 +85,7 @@ export default function Details({}) {
                           Product information
                         </h3>
 
-                        <p className="text-2xl text-gray-900">{product.price}</p>
+                        <p className="text-2xl text-gray-900">{"$ "+product.price}</p>
 
                         {/* Reviews */}
                         <div className="mt-6">
@@ -143,7 +118,7 @@ export default function Details({}) {
 
                         <form>
                           {/* Colors */}
-                          <div>
+                          {product.colors.length!=0&&<div>
                             <h4 className="text-sm font-medium text-gray-900">Color</h4>
 
                             <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
@@ -177,10 +152,10 @@ export default function Details({}) {
                                 ))}
                               </span>
                             </RadioGroup>
-                          </div>
+                          </div>}
 
                           {/* Sizes */}
-                          <div className="mt-10">
+                          {product.sizes.length!=0&&<div className="mt-10">
                             <div className="flex items-center justify-between">
                               <h4 className="text-sm font-medium text-gray-900">Size</h4>
                               <a href="#" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
@@ -239,7 +214,7 @@ export default function Details({}) {
                                 ))}
                               </div>
                             </RadioGroup>
-                          </div>
+                          </div>}
 
                           <button
                             type="submit"

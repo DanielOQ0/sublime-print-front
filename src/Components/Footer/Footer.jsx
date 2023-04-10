@@ -1,12 +1,12 @@
 import React from 'react'
 import './footer.css'
-import logo from './logo.png'
+import logo from '../../Media/logo.png'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function Footer() {
   return (
     <footer >
-        <script src="https://kit.fontawesome.com/c0e858ad48.js" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/c0e858ad48.js" crossOrigin="anonymous"></script>
        
         <div className="footer-container">
         <div className="footer-info">
@@ -71,9 +71,9 @@ export default function Footer() {
                 </li>
             </nav>
             </div>
-            <div class="footer-section">
-                <h2 class="footer-category">Follow us</h2>
-                <nav class="footer-list">
+            <div className="footer-section">
+                <h2 className="footer-category">Follow us</h2>
+                <nav className="footer-list">
                     <li>
                     <a href="#" className="footer-link">Facebook</a>
                     </li>
