@@ -1,19 +1,16 @@
 import React from 'react'
 import './footer.css'
 import logo from '../../Media/logo.png'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link as Anchor } from "react-router-dom";
+
 
 export default function Footer() {
   return (
     <footer >
-        <script src="https://kit.fontawesome.com/c0e858ad48.js" crossOrigin="anonymous"></script>
        
         <div className="footer-container">
         <div className="footer-info">
             
-          {/*   <a href="#" className="footer-title">
-             <img className="logo"src={logo} alt="" />
-            </a> */}
             <div>
                 <form className='form'>
                     <img className="logo"src={logo} alt="" />
@@ -31,19 +28,16 @@ export default function Footer() {
             <h2 className="footer-category">Customer Support</h2>
             <nav className="footer-list">
                 <li>
-                <a href="#" className="footer-link">My orders</a>
+                    <Anchor to="/#" className="footer-link">My orders</Anchor>
                 </li>
                 <li>
-                <a href="#" className="footer-link">Aid</a>
+                    <Anchor to="/#" className="footer-link">Aid</Anchor>
                 </li>
                 <li>
-                   {/*  <FontAwesomeIcon icon={faAddressCard} /> */}
-                   
-                  
-                    <a href="#" className="footer-link">Contact</a>
+                    <Anchor to="/#" className="footer-link">Contact</Anchor>
                 </li>
                 <li>
-                <a href="#" className="footer-link">+34 369 258 147</a>
+                    <Anchor to="/#" className="footer-link">+34 369 258 147</Anchor>
                 </li>
             </nav>
             </div>
@@ -52,22 +46,22 @@ export default function Footer() {
             <h2 className="footer-category">About us</h2>
             <nav className="footer-list">
                 <li>
-                <a href="#" className="footer-link">Sustainability</a>
+                    <Anchor to="/#" className="footer-link">Sustainability</Anchor>
                 </li>
                 <li>
-                <a href="#" className="footer-link">Press</a>
+                    <Anchor to="/#" className="footer-link">Press</Anchor>
                 </li>
                 <li>
-                <a href="#"  className="footer-link">wholesale orders</a>
+                    <Anchor to="/#" className="footer-link">wholesale orders</Anchor>
                 </li>
                 <li>
-                <a href="#" className="footer-link">data protection</a>
+                    <Anchor to="/#" className="footer-link">data protection</Anchor>
                 </li>
                 <li>
-                <a href="#" className="footer-link">data settings</a>
+                    <Anchor to="/#" className="footer-link">data settings</Anchor>
                 </li>
                 <li>
-                <a href="#" className="footer-link">Terms and conditions</a>
+                    <Anchor to="/#" className="footer-link">Terms and conditions</Anchor>
                 </li>
             </nav>
             </div>
@@ -75,24 +69,21 @@ export default function Footer() {
                 <h2 className="footer-category">Follow us</h2>
                 <nav className="footer-list">
                     <li>
-                    <a href="#" className="footer-link">Facebook</a>
+                        <Anchor to="/#" className="footer-link">Facebook</Anchor>
                     </li>
                     <li>
-                    <a href="#" className="footer-link">Instagram</a>
+                        <Anchor to="/#" className="footer-link">Instagram</Anchor>
                     </li>
                     <li>
-                    <a href="#"  className="footer-link">Pinterest</a>
+                        <Anchor to="/#" className="footer-link">Pinterest</Anchor>
                     </li>
                     <li>
-                    <a href="#" className="footer-link">Youtube</a>
+                      <Anchor to="/#" className="footer-link">Youtube</Anchor>
                     </li>
                 </nav>
             </div>
-            
-
          </div>
         </div>
-       
   </footer>
   
 

@@ -3,6 +3,7 @@ import './signup.css'
 import axios from 'axios'
 import { Toaster, toast } from 'react-hot-toast'
 import { motion } from 'framer-motion'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function SignUp() {
     
@@ -10,7 +11,8 @@ export default function SignUp() {
     let email = useRef()
     let password = useRef()
     let confirmPassword = useRef()
-    let url = 'http://localhost:8080/api/users/signup'
+    let url = 'https://subime-print-fgbog.ondigitalocean.app/api/users/signup'
+    let navigate = useNavigate()
 
 
     
@@ -28,7 +30,7 @@ export default function SignUp() {
             try {
                 await axios.post( url, data )
                 toast.success('User Successfully Registered')
-                e.target.reset()
+                navigate('/login')
             } catch (error) {
                 toast.error(error.response.data.message,{duration:1000})
             }   
@@ -70,6 +72,7 @@ export default function SignUp() {
                             name="confirm_password"
                             placeholder="Confirm Password" />
                         <button
+                            classNameName='boton-crearcuente'
                             type="submit"
                             className="boton-crearcuente w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
                         >Create Account</button>
@@ -85,10 +88,10 @@ export default function SignUp() {
                     </div>
                 </motion.div>
                 <div className="text-grey-dark mt-6">
-                    Already have an account? 
-                    <a className="no-underline border-b border-blue text-blue" href="../login/">
+                    Already have an account?  
+                    <Link className="log-in no-underline border-b border-blue text-blue" to="/login">
                         Log in
-                    </a>.
+                    </Link>.
                 </div>
             </div>
         </div>
