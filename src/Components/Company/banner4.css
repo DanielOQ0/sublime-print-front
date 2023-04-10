@@ -1,0 +1,27 @@
+.container-fluid4 {
+    padding: 4rem;
+  }
+    
+  .container4 {
+    margin: 0 auto;
+    padding-top: 0.5rem;
+    font-weight: 900;
+    font-size: 1.2em;
+    max-width: 796px;
+    height: 20rem;
+  }
+  
+  .intro4 {
+    background-color:  #E4F1F5;
+    color:  #7DBDF5;
+    padding-right: 50rem;
+    background-image: url('https://image.spreadshirtmedia.net/content/f_auto/ar_1920:600,c_fill,,g_xy_center,x_1960,y_0/w_1920/v4/cms/ml/teaser/Teaser_Gift_Easter_LP_UK');
+  }
+  
+  /* 
+  #7374FA
+  #6686DE
+  #7DBDF5
+  #E4F1F5
+  #00B2A5
+  */
