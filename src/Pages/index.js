@@ -5,8 +5,10 @@ import AdminLayout from "../Layouts/AdminLayout/AdminlLayout";
 import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
-import Register from "./Register/Register";
+import SignUp from "../Components/SignUp/SignUp";
 import Company from "./Company/Company";
+import LogIn from "../Components/LogIn/LogIn";
+
 
 
 export const router = createBrowserRouter([
@@ -41,7 +43,8 @@ export const router = createBrowserRouter([
             path: "/colors-textures",
             element: <NotFound />,
           },
-          { path: "/signup", element: <Register />},
+          { path: "/signup", element: <SignUp />},
+          { path: "/login", element: <LogIn />},
         
         ],
       },
