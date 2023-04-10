@@ -34,10 +34,10 @@ export const router = createBrowserRouter([
             path: "/company",
             element: <Company/>,
           }, 
-          /* {
+          {
             path: "/contact",
             element: <Contact />,
-          }, */
+          },
           {
             path: "/colors-textures",
             element: <NotFound />,
@@ -45,11 +45,7 @@ export const router = createBrowserRouter([
           { path: "/signup", element: <Register />},
         
         ],
-      },
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
+      }, 
       {
         path: "/*",element: <NotFound />,
       },
