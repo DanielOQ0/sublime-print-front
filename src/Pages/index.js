@@ -8,6 +8,7 @@ import Store from "./Store/Store";
 import Register from "./Register/Register";
 import Company from "./Company/Company";
 import Contact from "./Contact/Contact"
+import ColorsTextures from "./ColorsTextures/ColorsTextures"
 
 
 export const router = createBrowserRouter([
@@ -40,7 +41,7 @@ export const router = createBrowserRouter([
           },
           {
             path: "/colors-textures",
-            element: <NotFound />,
+            element: <ColorsTextures />,
           },
           { path: "/signup", element: <Register />},
         
