@@ -2,6 +2,7 @@ import React, { useRef } from 'react'
 import './signup.css'
 import axios from 'axios'
 import { Toaster, toast } from 'react-hot-toast'
+import { motion } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 
 export default function SignUp() {
@@ -38,9 +39,12 @@ export default function SignUp() {
 
     return (
     <div>
-        <div className="bg-grey-lighter min-h-screen flex flex-col">
+        <div className="bg-gray-300 min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                <motion.div
+                    initial={{y:200}}
+                    animate={{y:0, duration:2}}
+                 className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Sign up</h1>
                     <form onSubmit={handleSubmit}>
                         <input 
@@ -82,7 +86,7 @@ export default function SignUp() {
                             Privacy Policy
                         </a>
                     </div>
-                </div>
+                </motion.div>
                 <div className="text-grey-dark mt-6">
                     Already have an account?  
                     <Link className="log-in no-underline border-b border-blue text-blue" to="/login">
