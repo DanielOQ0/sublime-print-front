@@ -25,6 +25,17 @@ const container = {
       }
     }
 };
+const containerFast = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.1,
+      staggerChildren: 0.1
+    }
+  }
+};
   
 const item = {
     hidden: { y: 20, opacity: 0 },
@@ -89,9 +100,11 @@ const item = {
     return classes.filter(Boolean).join(' ')
   }
 
-//Producto de prueba
+//Variable de producto
 let products=[]
 let product ={}
+let page=1
+let quantity=6
 
 export default function Store() {
     const [render,setRender] = useState(false)
@@ -115,10 +128,16 @@ export default function Store() {
             dispatch(captureDetails({details:true,product:product}))
         }
     }
+    function handlePrevious(){
+      console.log("previous");
+    }
+    function handleNext(){
+      console.log("next");
+    }
 
   return (
     <>
-            <div className="bg-white">
+      <div className="bg-white">
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -292,13 +311,20 @@ export default function Store() {
               {/* Filters */}
               <form className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
+                <motion.ul 
+                variants={container}
+                initial="hidden"
+                animate="visible"
+                role="list" 
+                className="space-y-4 border-b border-gray-200 pb-6 text-sm font-medium text-gray-900">
                   {subCategories.map((category) => (
-                    <li key={category.name}>
+                    <motion.li 
+                    variants={item}
+                    key={category.name}>
                       <a href={category.href}>{category.name}</a>
-                    </li>
+                    </motion.li>
                   ))}
-                </ul>
+                </motion.ul>
 
                 {filters.map((section) => (
                   <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6">
@@ -317,9 +343,13 @@ export default function Store() {
                           </Disclosure.Button>
                         </h3>
                         <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
+                          <motion.div 
+                          variants={containerFast}
+                          initial="hidden"
+                          animate="visible"
+                          className="space-y-4">
                             {section.options.map((option, optionIdx) => (
-                              <div key={option.value} className="flex items-center">
+                              <motion.div variants={item} key={option.value} className="flex items-center">
                                 <input
                                   id={`filter-${section.id}-${optionIdx}`}
                                   name={`${section.id}[]`}
@@ -334,9 +364,9 @@ export default function Store() {
                                 >
                                   {option.label}
                                 </label>
-                              </div>
+                              </motion.div>
                             ))}
-                          </div>
+                          </motion.div>
                         </Disclosure.Panel>
                       </>
                     )}
@@ -362,6 +392,37 @@ export default function Store() {
                         </motion.li>
                     ))}
                 </motion.ul>
+                {/*navigate*/}
+                <div className="flex items-center justify-center py-10 lg:px-0 sm:px-6 px-4">
+                  <div className="lg:w-3/5 w-full  flex items-center justify-between border-t border-gray-200">
+                      <div onClick={console.log("previous")} className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
+                          <svg width={14} height={8} viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1.1665 4H12.8332" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <p className="text-sm ml-3 font-medium leading-none ">Previous</p>
+                      </div>
+                      <div className="sm:flex hidden">
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">1</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">2</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">3</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-indigo-700 border-t border-indigo-400 pt-3 mr-4 px-2">4</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">5</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">6</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">7</p>
+                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">8</p>
+                      </div>
+                      <div className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
+                          <p onClick={console.log("next")} className="text-sm font-medium leading-none mr-3">Next</p>
+                          <svg width={14} height={8} viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1.1665 4H12.8332" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                              <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                      </div>
+                  </div>
+                </div>
                 {openDetails?<Details product={product}/>:null}
               </div>
             </div>
