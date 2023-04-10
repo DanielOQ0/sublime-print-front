@@ -7,6 +7,7 @@ import Home from "./Home/Home";
 import Store from "./Store/Store";
 import Register from "./Register/Register";
 import Company from "./Company/Company";
+import Contact from "./Contact/Contact"
 
 
 export const router = createBrowserRouter([
@@ -33,10 +34,10 @@ export const router = createBrowserRouter([
             path: "/company",
             element: <Company/>,
           }, 
-          {
+          /* {
             path: "/contact",
-            element: <NotFound />,
-          },
+            element: <Contact />,
+          }, */
           {
             path: "/colors-textures",
             element: <NotFound />,
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
           { path: "/signup", element: <Register />},
         
         ],
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
       {
         path: "/*",element: <NotFound />,
