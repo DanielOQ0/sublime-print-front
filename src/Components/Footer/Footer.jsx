@@ -15,7 +15,7 @@ export default function Footer() {
                 <form className='form'>
                     <img className="logo"src={logo} alt="" />
                     <p>Subscribe to our newsletter</p>
-                    <div className="container">
+                    <div className="containerNewlleter">
                         <input className="input-mail" type="text" placeholder="your email" name="mail"></input>
                         <input className='send' type="submit" value="subscribe"></input>
                     </div>
