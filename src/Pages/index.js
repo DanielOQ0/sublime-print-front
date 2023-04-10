@@ -7,6 +7,8 @@ import Home from "./Home/Home";
 import Store from "./Store/Store";
 import SignUp from "../Components/SignUp/SignUp";
 import Company from "./Company/Company";
+import LogIn from "../Components/LogIn/LogIn";
+
 
 
 export const router = createBrowserRouter([
@@ -42,6 +44,7 @@ export const router = createBrowserRouter([
             element: <NotFound />,
           },
           { path: "/signup", element: <SignUp />},
+          { path: "/login", element: <LogIn />},
         
         ],
       },
