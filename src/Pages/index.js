@@ -6,6 +6,7 @@ import MainLayout from "../Layouts/MainLayout/MainLayout";
 import Home from "./Home/Home";
 import Store from "./Store/Store";
 import Register from "./Register/Register";
+import Company1 from "./Company1/Company1";
 
 
 export const router = createBrowserRouter([
@@ -28,10 +29,10 @@ export const router = createBrowserRouter([
             path: "/store",
             element: <Store/>,
           },
-          {
+          /* {
             path: "/company",
-            element: <Store/>,
-          },
+            element: <Company/>,
+          }, */
           {
             path: "/contact",
             element: <Store/>,
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
           { path: "/signup", element: <Register />},
         
         ],
+      },
+      {
+        path: "/company",
+        element: <Company1/>,
       },
       {
         path: "/*",element: <NotFound />,
