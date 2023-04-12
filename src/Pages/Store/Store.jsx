@@ -1,7 +1,7 @@
 import { Fragment, useState, React, useEffect } from 'react'
 import './Store.css'
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import ProductCard from '../../Components/ProductCard/ProductCard'
 import { useDispatch, useSelector } from 'react-redux'
@@ -55,18 +55,6 @@ const item = {
   ]
   const filters = [
     {
-      id: 'color',
-      name: 'Color',
-      options: [
-        { value: 'white', label: 'White', checked: false },
-        { value: 'beige', label: 'Beige', checked: false },
-        { value: 'blue', label: 'Blue', checked: false },
-        { value: 'brown', label: 'Brown', checked: false },
-        { value: 'green', label: 'Green', checked: false },
-        { value: 'purple', label: 'Purple', checked: false },
-      ],
-    },
-    {
       id: 'category',
       name: 'Category',
       options: [
@@ -79,19 +67,6 @@ const item = {
         { value: 'Mousepad', label: 'Mousepad', checked: false },
         { value: 'Water Bottle', label: 'Water Bottle', checked: false },
         { value: 'Backpack', label: 'Backpack', checked: false },
-      ],
-    },
-    {
-      id: 'size',
-      name: 'Size',
-      options: [
-        { value: 'XS', label: 'XS', checked: false },
-        { value: 'S', label: 'S', checked: false },
-        { value: 'M', label: 'M', checked: false },
-        { value: 'L', label: 'L', checked: false },
-        { value: 'XL', label: 'XL', checked: false },
-        { value: 'XXl', label: 'XXL', checked: false },
-        { value: 'XXXl', label: 'XXXL', checked: false },
       ],
     },
   ]
@@ -107,6 +82,7 @@ let page=1
 let quantity=6
 
 export default function Store() {
+
     const [render,setRender] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const dispatch = useDispatch()
@@ -121,6 +97,14 @@ export default function Store() {
       .catch((error)=>console.log(error))
       
     },[])
+
+    function handlePrevious(e){
+      console.log("previous");
+    }
+
+    function handleNext(e){
+      console.log("next");
+    }
     
     function handleProduct(e){
         product = products.find(each=>{ return each._id===e.target.id})
@@ -128,16 +112,10 @@ export default function Store() {
             dispatch(captureDetails({details:true,product:product}))
         }
     }
-    function handlePrevious(){
-      console.log("previous");
-    }
-    function handleNext(){
-      console.log("next");
-    }
 
   return (
     <>
-      <div className="bg-white">
+      <div className="bg-gray-100">
       <div>
         {/* Mobile filter dialog */}
         <Transition.Root show={mobileFiltersOpen} as={Fragment}>
@@ -239,7 +217,7 @@ export default function Store() {
           </Dialog>
         </Transition.Root>
 
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <main className="bg-gray-100 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-6">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">Store</h1>
 
@@ -301,12 +279,10 @@ export default function Store() {
               </button>
             </div>
           </div>
-
           <section aria-labelledby="products-heading" className="pb-24 pt-6">
             <h2 id="products-heading" className="sr-only">
               Products
             </h2>
-
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
@@ -331,7 +307,7 @@ export default function Store() {
                     {({ open }) => (
                       <>
                         <h3 className="-my-3 flow-root">
-                          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                          <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
                             <span className="font-medium text-gray-900">{section.name}</span>
                             <span className="ml-6 flex items-center">
                               {open ? (
@@ -373,7 +349,6 @@ export default function Store() {
                   </Disclosure>
                 ))}
               </form>
-
               {/* Product grid */}
               <div className="lg:col-span-3">
                 <motion.ul 
@@ -395,12 +370,8 @@ export default function Store() {
                 {/*navigate*/}
                 <div className="flex items-center justify-center py-10 lg:px-0 sm:px-6 px-4">
                   <div className="lg:w-3/5 w-full  flex items-center justify-between border-t border-gray-200">
-                      <div onClick={console.log("previous")} className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
-                          <svg width={14} height={8} viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1.1665 4H12.8332" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M1.1665 4L4.49984 7.33333" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M1.1665 4.00002L4.49984 0.666687" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                      <div onClick={handlePrevious} className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
+                      <ArrowLeftIcon className='w-5 h-5'/>
                           <p className="text-sm ml-3 font-medium leading-none ">Previous</p>
                       </div>
                       <div className="sm:flex hidden">
@@ -413,13 +384,9 @@ export default function Store() {
                           <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">7</p>
                           <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">8</p>
                       </div>
-                      <div className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
-                          <p onClick={console.log("next")} className="text-sm font-medium leading-none mr-3">Next</p>
-                          <svg width={14} height={8} viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1.1665 4H12.8332" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M9.5 7.33333L12.8333 4" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                              <path d="M9.5 0.666687L12.8333 4.00002" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                          </svg>
+                      <div onClick={handleNext} className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
+                          <p className="text-sm font-medium leading-none mr-3">Next</p>
+                          <ArrowRightIcon className='w-5 h-5'/>
                       </div>
                   </div>
                 </div>
