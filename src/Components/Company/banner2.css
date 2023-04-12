@@ -1,0 +1,25 @@
+.container-fluid2 {
+  padding: 4rem;
+}
+  
+.container2 {
+  margin: 0 auto;
+  padding-top: 2rem;
+  font-size: 1.2em;
+  max-width: 796px;
+  height: 20rem;
+  font-weight: 800;
+}
+
+.intro2 {
+  background-color:  #6686DE;
+  color: #fff;
+}
+
+/* 
+#7374FA
+#6686DE
+#7DBDF5
+#E4F1F5
+#00B2A5
+*/
