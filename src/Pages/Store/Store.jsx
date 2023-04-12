@@ -1,6 +1,6 @@
 import { Fragment, useState, React, useEffect } from 'react'
 import './Store.css'
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'
+import { Dialog, Disclosure, Menu, Transition , Popover } from '@headlessui/react'
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import ProductCard from '../../Components/ProductCard/ProductCard'
@@ -13,38 +13,38 @@ import axios from 'axios'
 
 const { captureDetails } = detailsAction;
 
-//Framer motion
-const container = {
+  //Framer motion
+  const container = {
+      hidden: { opacity: 1, scale: 0 },
+      visible: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+          delayChildren: 0.4,
+          staggerChildren: 0.2
+        }
+      }
+  };
+  const containerFast = {
     hidden: { opacity: 1, scale: 0 },
     visible: {
       opacity: 1,
       scale: 1,
       transition: {
-        delayChildren: 0.4,
-        staggerChildren: 0.2
+        delayChildren: 0.1,
+        staggerChildren: 0.1
       }
     }
-};
-const containerFast = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.1,
-      staggerChildren: 0.1
-    }
-  }
-};
-  
-const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1
-    }
-};
-//Filtros
+  };
+    
+  const item = {
+      hidden: { y: 20, opacity: 0 },
+      visible: {
+        y: 0,
+        opacity: 1
+      }
+  };
+  //Filtros
   const sortOptions = [
     { name: 'Best Rating', href: '#', current: true },
     { name: 'Newest', href: '#', current: false },
@@ -53,22 +53,13 @@ const item = {
   ]
   const subCategories = [
   ]
-  const filters = [
-    {
-      id: 'category',
-      name: 'Category',
-      options: [
-        { value: 'Shirts', label: 'Shirts', checked: false },
-        { value: 'Pack', label: 'Pack', checked: false },
-        { value: 'Mug', label: 'Mug', checked: false },
-        { value: 'Cap', label: 'Cap', checked: false },
-        { value: 'Keychain', label: 'Keychain', checked: false },
-        { value: 'Outfit Pack', label: 'Outfit Pack', checked: false },
-        { value: 'Mousepad', label: 'Mousepad', checked: false },
-        { value: 'Water Bottle', label: 'Water Bottle', checked: false },
-        { value: 'Backpack', label: 'Backpack', checked: false },
-      ],
-    },
+  let filters = []
+  //cantidad de productos en pantalla
+  const items = [
+    {quantity:4},
+    {quantity:6},
+    {quantity:8},
+    {quantity:10}
   ]
   
   function classNames(...classes) {
@@ -80,46 +71,118 @@ let products=[]
 let product ={}
 let page=1
 let quantity=6
+let qPage;
+const pageClassDisactive = "text-sm font-medium leading-none text-gray-600 border-t border-transparent cursor-default pt-3 mr-4 px-2"
+const pageClassActive = "text-sm font-medium leading-none text-indigo-700 border-t border-indigo-400 cursor-default pt-3 mr-4 px-2"
+let pagination;
+let categories=[]
+let sort="rating"
 
 export default function Store() {
 
     const [render,setRender] = useState(false)
+    const [filter,setFilter] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const dispatch = useDispatch()
     let openDetails = useSelector(store=>store.details.details)
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
 
-    useEffect(()=>{
-      axios.get("http://localhost:8080/api/products?page=1&quantity=6",headers)
+    //Effects
+    useEffect(()=>{//traer categorias
+      axios.get('http://localhost:8080/api/categories',headers)
+      .then((res)=>{
+        let cat={
+          id: 'category',
+          name: 'Category',
+          options: [
+          ],
+        }
+        res.data.Categories.map((e)=>{ cat.options.push({ value: e._id, label: e.name, checked: false }) })
+        
+        if(filters.length<1){
+          filters.push(cat)
+        }
+      }
+      ).catch((error)=>console.log(error))
+    },[])
+
+    useEffect(()=>{//Traer productos con filtros
+      let url='http://localhost:8080/api/products?page='+page+'&quantity='+quantity+'&category='+categories.join()+'&sort='+sort
+      console.log(url);
+      axios.get(url,headers)
       .then((res)=>{
         products=res.data.products
+        qPage=Math.ceil(res.data.count/quantity)
+        pagination=[]
+        for(let i = 0; i < qPage; i++) {
+          i+1===page?
+          pagination.push({class:pageClassActive,value:i+1}):
+          pagination.push({class:pageClassDisactive,value:i+1})
+        }
         setRender(!render)
       })
       .catch((error)=>console.log(error))
-    },[])
+    },[filter])
 
-    function handlePrevious(e){
-      console.log("previous");
-    }
-
-    function handleNext(e){
-      console.log("next");
-    }
-    
+    ///Funciones
     function handleProduct(e){
         product = products.find(each=>{ return each._id===e.target.id})
         if(product){
             dispatch(captureDetails({details:true,product:product}))
         }
     }
+    function handleQuantity(e){
+      quantity=parseInt(e.target.id)
+      setFilter(!filter)
+    }
     function handlePrevious(){
-      console.log("previous");
+      if(page===1){
+        page=qPage
+      }else{
+        page--
+      }
+      setFilter(!filter)
     }
     function handleNext(){
-      console.log("next");
+      if(page===qPage){
+        page=1
+      }else{
+        page++
+      }
+      setFilter(!filter)
     }
-
+    function handleCategory(e){
+      if(e.target.checked){
+        categories.push(e.target.value)
+      }else{
+        categories = categories.filter((each) => each !== e.target.value)
+      }
+      setFilter(!filter)
+    }
+    function handleSort(e){
+      sortOptions.forEach((each, index)=>{
+        each.name===e.target.firstChild.data?sortOptions[index].current=true:sortOptions[index].current=false
+      })
+      switch (e.target.firstChild.data) {
+        case "Best Rating":
+         sort="rating"
+        break;
+        case "Newest":
+          sort="newest"
+        break;
+        case "Price: Low to High":
+          sort="low"
+        break;
+        case "Price: High to Low":
+          sort="high"
+        break; 
+        default:
+          break;
+      }
+      setFilter(!filter)
+    }
+    
   return (
     <>
       <div className="bg-gray-100">
@@ -254,16 +317,18 @@ export default function Store() {
                       {sortOptions.map((option) => (
                         <Menu.Item key={option.name}>
                           {({ active }) => (
-                            <a
+                            <span
+                              id={option.href}
+                              onClick={handleSort}
                               href={option.href}
                               className={classNames(
-                                option.current ? 'font-medium text-gray-900' : 'text-gray-500',
+                                option.current ? 'font-medium text-gray-900 cursor-pointer cursor-pointer' : 'text-gray-500 cursor-pointer',
                                 active ? 'bg-gray-100' : '',
                                 'block px-4 py-2 text-sm'
                               )}
                             >
                               {option.name}
-                            </a>
+                            </span>
                           )}
                         </Menu.Item>
                       ))}
@@ -272,10 +337,36 @@ export default function Store() {
                 </Transition>
               </Menu>
 
-              <button type="button" className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
-                <span className="sr-only">View grid</span>
-                <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
-              </button>
+              <Popover className="relative">
+                <Popover.Button className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7">
+                  <span className="sr-only">View grid</span>
+                  <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
+                </Popover.Button>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-0"
+                  enterTo="opacity-100 translate-y-1"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-1"
+                  leaveTo="opacity-0 translate-y-0"
+                >
+                  <Popover.Panel className="absolute right-3 top-0 z-10 mt-3 overflow-hidden rounded-3xl bg-white shadow-lg rounded-tr-none">
+                    <div className="p-4">
+                      {items.map((item,index) => (
+                        <div
+                          key={index}
+                          className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50"
+                        >
+                          <div onClick={handleQuantity} id={item.quantity} className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white cursor-pointer">
+                            {item.quantity}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Popover.Panel>
+                </Transition>
+              </Popover>
               <button
                 type="button"
                 className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
@@ -334,6 +425,7 @@ export default function Store() {
                             {section.options.map((option, optionIdx) => (
                               <motion.div variants={item} key={option.value} className="flex items-center">
                                 <input
+                                  onChange={handleCategory}
                                   id={`filter-${section.id}-${optionIdx}`}
                                   name={`${section.id}[]`}
                                   defaultValue={option.value}
@@ -382,14 +474,9 @@ export default function Store() {
                           <p className="text-sm ml-3 font-medium leading-none ">Previous</p>
                       </div>
                       <div className="sm:flex hidden">
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">1</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">2</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">3</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-indigo-700 border-t border-indigo-400 pt-3 mr-4 px-2">4</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">5</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">6</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">7</p>
-                          <p className="text-sm font-medium leading-none cursor-pointer text-gray-600 hover:text-indigo-700 border-t border-transparent hover:border-indigo-400 pt-3 mr-4 px-2">8</p>
+                        {pagination?.map((each)=>(
+                          <p key={each.value} className={each.class}>{each.value}</p>
+                        ))}
                       </div>
                       <div onClick={handleNext} className="flex items-center pt-3 text-gray-600 hover:text-indigo-700 cursor-pointer">
                           <p className="text-sm font-medium leading-none mr-3">Next</p>

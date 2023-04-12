@@ -27,8 +27,6 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress)
 
   return (
     <header className="header z-10">
