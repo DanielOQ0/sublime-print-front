@@ -18,7 +18,7 @@ export default function ProductCard({product}) {
                     {product.name}
                 </h3>
             </div>
-            <p className="text-sm font-medium text-gray-900">{product.price}</p>
+            <p className="text-sm font-medium text-gray-900">$ {product.price}</p>
         </div>
   </div>
   )
