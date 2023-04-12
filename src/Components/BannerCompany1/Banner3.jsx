@@ -41,8 +41,6 @@ export default function Example() {
               width={158}
               height={48}
             />
-            
-           
           </div>
         </div>
       </div>
