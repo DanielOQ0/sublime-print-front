@@ -97,7 +97,6 @@ export default function Store() {
         setRender(!render)
       })
       .catch((error)=>console.log(error))
-      
     },[])
 
     function handlePrevious(e){
