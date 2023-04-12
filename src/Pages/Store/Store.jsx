@@ -112,6 +112,12 @@ export default function Store() {
             dispatch(captureDetails({details:true,product:product}))
         }
     }
+    function handlePrevious(){
+      console.log("previous");
+    }
+    function handleNext(){
+      console.log("next");
+    }
 
   return (
     <>
