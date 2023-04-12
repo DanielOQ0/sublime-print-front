@@ -21,36 +21,14 @@ export const router = createBrowserRouter([
   {
     path: "/",element: <MainLayout />,
     children: [
-      {
-        path: "/",element: <ProtectedRouter expectedRole="visitor"/>,
-        children:[
-          {
-            path: "/",element: <Home/>,
-          },
-          {
-            path: "/store",
-            element: <Store/>,
-          },
-          {
-            path: "/company",
-            element: <Company/>,
-          }, 
-          {
-            path: "/contact",
-            element: <Contact />,
-          },
-          {
-            path: "/colors-textures",
-            element: <ColorsTextures />,
-          },
-          { path: "/signup", element: <SignUp />},
-          { path: "/login", element: <LogIn />},
-        
-        ],
-      }, 
-      {
-        path: "/*",element: <NotFound />,
-      },
+      {path: "/",element: <Home/>,},
+      {path: "/store",element: <Store/>,},
+      {path: "/company",element: <Company/>,}, 
+      {path: "/contact",element: <Contact />,},
+      {path: "/colors-textures",element: <ColorsTextures />,},
+      { path: "/signup", element: <SignUp />},
+      { path: "/login", element: <LogIn />}, 
+      {path: "/*",element: <NotFound />,},
     ],
   },
 ]);
