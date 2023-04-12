@@ -7,7 +7,7 @@ const colors = [
       'https://www.colores.org.es/imagenes_colores/Amarillento-franc%e9s-luz.jpg',
   },
   {
-    name: 'yellow canar',
+    name: 'yellow',
     imageUrl:
       'https://www.colores.org.es/imagenes_colores/Amarillo-canario.jpg',
   },
@@ -103,30 +103,25 @@ const colors = [
   },
 ]
 
-
 export default function Example() {
   return (
-    <div className="bg-white py-12 sm:py-16">
+    <div className="bg-white py-12 sm:py-16 available-colours">
       <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-800 sm:text-2xl">Available colours</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
             These are the fabric colors
           </p>
       </div>
-     
-      <div className="mx-auto grid max-w-7xl gap-x-9 gap-y-20 px-6 lg:px-8 xl:grid-cols-4 colors-list">
-        <ul role="list" className="grid gap-x-3 gap-y-2 sm:grid-cols-10 sm:gap-y-8 xl:col-span-8">
+      <ul role="list" className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12 colors-list">
           {colors.map((color) => (
             <li key={color.name}>
-              <div className="flex items-center gap-x-6">
-                 <img className="h-16 w-16 rounded-full" src={color.imageUrl} alt="" />
-                <div>
-                </div>
+              <div className="color-container">
+                <img className="h-16 w-16 rounded-full" src={color.imageUrl} alt="" />
+                <span className="color-name">{color.name}</span>
               </div>
             </li>
           ))}
         </ul>
-      </div>
     </div>
   )
 }
