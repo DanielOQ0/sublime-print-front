@@ -87,9 +87,11 @@ export default function Store() {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
     const dispatch = useDispatch()
     let openDetails = useSelector(store=>store.details.details)
+    let token = localStorage.getItem("token")
+    let headers = { headers: { Authorization: `Bearer ${token}` } };
 
     useEffect(()=>{
-      axios.get("http://localhost:8080/api/products?page=1&quantity=6")
+      axios.get("http://localhost:8080/api/products?page=1&quantity=6",headers)
       .then((res)=>{
         products=res.data.products
         setRender(!render)
