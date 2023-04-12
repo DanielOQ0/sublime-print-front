@@ -10,6 +10,8 @@ import Company from "./Company/Company";
 import Contact from "./Contact/Contact"
 import ColorsTextures from "./ColorsTextures/ColorsTextures"
 import LogIn from "../Components/LogIn/LogIn";
+import Profile from "./Profile/ProfileUser"
+import ProfileEdit from "./Profile/ProfileEdit";
 
 export const router = createBrowserRouter([
   {
@@ -28,7 +30,10 @@ export const router = createBrowserRouter([
       {path: "/colors-textures",element: <ColorsTextures />,},
       { path: "/signup", element: <SignUp />},
       { path: "/login", element: <LogIn />}, 
+      { path: "/profile", element: <Profile/>},
+      { path: "/profile-edit", element: <ProfileEdit/>},
       {path: "/*",element: <NotFound />,},
+      
     ],
   },
 ]);

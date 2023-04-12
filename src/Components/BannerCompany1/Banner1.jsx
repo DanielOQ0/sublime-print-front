@@ -1,3 +1,5 @@
+import './banner1.css'
+
 const links = [
     { name: 'Open roles', href: '#' },
     { name: 'Internship program', href: '#' },
@@ -5,15 +7,15 @@ const links = [
     { name: 'Meet our leadership', href: '#' },
   ]
   const stats = [
-    { name: 'Offices worldwide', value: '12' },
-    { name: 'Full-time colleagues', value: '300+' },
+    /* { name: 'Offices worldwide', value: '12' },
+    { name: 'Full-time colleagues', value: '300+' }, */
    /*  { name: 'Hours per week', value: '40' }, */
    /*  { name: 'Paid time off', value: 'Unlimited' }, */
   ]
   
   export default function Example() {
     return (
-      <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-32">
+      <div className="relative isolate overflow-hidden bg-gray-900 py-24 sm:py-30">
         <img
           src="https://image.spreadshirtmedia.net/content/f_png,w_780/cms/aboutus/thecompany/company_mainimage"
           alt=""
@@ -43,11 +45,11 @@ const links = [
             }}
           />
         </div>
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10">
           <div className="mx-auto max-w-2xl lg:mx-0">
             <h2 className="text-4xl font-bold tracking-tight text-black sm:text-6xl">Sublime Print</h2>
-            <p className="mt-6 text-lg leading-8 text-black-300">
-            Sublime Print was founded in 2002 in Montevideo and is currently one of the Latin American leaders among e-commerce platforms for print-on-demand clothing and accessories. With the help of Sublime Print, in thousands of stores and on the own Platform, sellers successfully offer their promotional items or their own designs. Customers also have the ability to design clothing and accessories however they like in the Responsive T-shirt Designer, with their own designs or with motifs from the community.
+            <p className="mt-6 text-lg leading-8 text-black-300 banner-text">
+            Sublime Print was founded in 2002 in Montevideo and is currently one of the <br/>Latin American  leaders among e-commerce platforms for print-on-demand clothing and <br/>accessories. With the help of Sublime Print, in thousands of stores and on the own <br/>Platform, sellers successfully offer their promotional items or their own designs. <br/>Customers also have the ability to design clothing and accessories however they like <br/>in the Responsive T-shirt Designer, with their own designs or with motifs from the community.
             </p>
           </div>
           <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
@@ -65,3 +67,4 @@ const links = [
     )
   }
   
+

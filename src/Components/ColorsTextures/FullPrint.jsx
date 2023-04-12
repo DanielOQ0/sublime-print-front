@@ -7,11 +7,6 @@ const estampados = [
       'https://littleblue.com.ar/img/inspire/fullprints/fullprints-floreadas.png',
   },
   {
-    name: 'DRAWN',
-    imageUrl:
-      'https://littleblue.com.ar/img/inspire/fullprints/fullprints-dibujadas.png',
-  },
-  {
     name: 'PSYCHEDELIC',
     imageUrl:
       'https://littleblue.com.ar/img/inspire/fullprints/fullprints-psicodelicas.png',
@@ -40,7 +35,7 @@ const estampados = [
 
 export default function Example() {
   return (
-    <div className="bg-white py-12 sm:py-16">
+    <div className="bg-white py-12 sm:py-16 fullprint">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-2xl">FULLPRINT PRINTS</h2>
           <p className="mt-6 text-lg leading-8 text-gray-600">
@@ -48,13 +43,13 @@ export default function Example() {
           </p>
         </div>
 
-        <ul role="list" className="grid gap-x-3 gap-y-2 sm:grid-cols-3 sm:gap-y-6 xl:col-span-8 full-print">
+        <ul role="list" className="grid grid-cols-2 gap-1 md:grid-cols-3 lg:grid-cols-6"> 
           {estampados.map((estampados) => (
             <li key={estampados.name}>
-              <div className="flex items-center gap-x-2">
-                <img className="h-36 w-36 rounded-full" src={estampados.imageUrl} alt="" />
+              <div className="items-center texturas">
+                <img className="h-40 w-40 rounded-full" src={estampados.imageUrl} alt="" />
                 <div>
-                  <h3 className="text-base font-semibold leading-4 tracking-tight text-gray-800">{estampados.name}</h3>
+                  <h3 className="leading-2 tracking-tight text-gray-800">{estampados.name}</h3>
                 </div>
               </div>
             </li>
