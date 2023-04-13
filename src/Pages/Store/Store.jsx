@@ -109,7 +109,6 @@ export default function Store() {
 
     useEffect(()=>{//Traer productos con filtros
       let url='http://localhost:8080/api/products?page='+page+'&quantity='+quantity+'&category='+categories.join()+'&sort='+sort
-      console.log(url);
       axios.get(url,headers)
       .then((res)=>{
         products=res.data.products
@@ -152,12 +151,13 @@ export default function Store() {
       }
       setFilter(!filter)
     }
-    function handleCategory(e){
+    function handleCategory(e){ 
       if(e.target.checked){
         categories.push(e.target.value)
       }else{
         categories = categories.filter((each) => each !== e.target.value)
       }
+      page=1;
       setFilter(!filter)
     }
     function handleSort(e){
