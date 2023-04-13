@@ -2,17 +2,33 @@ import React, { useState } from "react";
 import './Cart.css'
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import axios from "axios";
 
-function Cart() {
+function Cart({cla}) {
+
     const [show, setShow] = useState(false);
+    let token = localStorage.getItem("token")
+    let headers = { headers: { Authorization: `Bearer ${token}` } };
+
+    function handleOpen(){
+        setShow(!show)
+        let url = 'http://localhost:8080/api/cart'
+        axios.get(url,headers)
+        .then((res)=>{
+            console.log(res.data.cart);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }
     return (
         <>
             <div>
-                <div className="flex items-center justify-center py-8">
+                <div className={cla}>
                     <motion.span 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick={() => setShow(!show)} >
+                    onClick={handleOpen}>
                         <ShoppingBagIcon className='h-10 w-10'/>
                     </motion.span>
                 </div>
@@ -29,7 +45,7 @@ function Cart() {
                                         <p className="text-sm pl-2 leading-none">Back</p>
                                     </div>
                                     <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
-                                    {/* modelo producto 
+                                    {
                                     <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
                                         <div className="w-1/4">
                                             <img src="https://cdn.tuk.dev/assets/templates/e-commerce-kit/bestSeller3.png" alt className="w-full h-full object-center object-cover" />
@@ -55,7 +71,7 @@ function Cart() {
                                                 <p className="text-base font-black leading-none text-gray-800">$9,000</p>
                                             </div>
                                         </div>
-                                    </div>*/}
+                                    </div>}
                                 </div>
                                 <div className="xl:w-1/2 md:w-1/3 xl:w-1/4 w-full bg-gray-100 h-full">
                                     <div className="flex flex-col md:h-screen px-14 py-20 justify-between overflow-y-auto">

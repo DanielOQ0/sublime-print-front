@@ -27,6 +27,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  let token = localStorage.getItem("token")
 
   return (
     <header className="header z-10">
@@ -119,10 +120,10 @@ export default function NavBar() {
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
+          {!token?<Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
             Sing up <span aria-hidden="true">&rarr;</span>
-          </Anchor>
-          <Cart/>
+          </Anchor>:
+          <Cart cla="flex items-center justify-center py-8"/>}
         </div>
         
       </nav>
@@ -139,14 +140,12 @@ export default function NavBar() {
         >
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Anchor to="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
                 className="logo2"
                 src={require("../../Media/logo.png")}
                 alt=""
               />
-            </Anchor>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -202,15 +201,17 @@ export default function NavBar() {
                 >
                   Company
                 </Anchor>
+                <Cart cla="flex items-center justify-start py-8"/>
               </div>
               <div className="py-6">
+                {!token?
                 <Anchor
                   to="/signup"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Sign up
-                </Anchor>
-                <Cart/>
+                </Anchor>:
+                null}
               </div>
             </div>
           </div>
