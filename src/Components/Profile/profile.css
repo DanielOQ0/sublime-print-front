@@ -1,0 +1,27 @@
+.probando{
+    color: red;
+}
+.profile-page{
+    padding-top: 3rem;
+    background-color: #E4F1F5;
+}
+
+.image-profile img{
+    margin-top: 1rem;
+    width: 10rem;
+}
+
+
+.img-photo{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+/* 
+#7374FA
+#6686DE
+#7DBDF5
+#E4F1F5
+#00B2A5
+*/

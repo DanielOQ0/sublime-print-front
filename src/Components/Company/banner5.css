@@ -1,0 +1,25 @@
+.container-fluid5 {
+    padding: 4rem;
+  }
+    
+  .container5 {
+    margin: 0 auto;
+    padding-top: 2rem;
+    font-size: 1.2em;
+    max-width: 796px;
+    height: 20rem;
+    font-weight: 800;
+  }
+  
+  .intro5 {
+    background-color:  #7374FA;
+    color: white;
+  }
+  
+  /* 
+  #7374FA
+  #6686DE
+  #7DBDF5
+  #E4F1F5
+  #00B2A5
+  */
