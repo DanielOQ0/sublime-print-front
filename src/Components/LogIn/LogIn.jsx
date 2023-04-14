@@ -4,7 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Toaster, toast } from 'react-hot-toast'
 import axios from 'axios'
 import { motion } from 'framer-motion'
+import { useDispatch } from 'react-redux'
+import userActions from "../../Store/CaptureUser/actions"
 
+const { captureUser } = userActions
 
 export default function LogIn() {
 
@@ -12,6 +15,7 @@ export default function LogIn() {
     let email = useRef()
     let password = useRef()
     let navigate = useNavigate()
+    let dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
         
@@ -24,11 +28,22 @@ export default function LogIn() {
 
         try {
             await axios.post(url, data)
-            .then( response => localStorage.setItem('token',response.data.token))
+            .then( res => {
+            localStorage.setItem('token',res.data.token)
+            localStorage.setItem(
+                `user`,
+                JSON.stringify({
+                  name: res.data.user.name,
+                  email: res.data.user.email,
+                  photo: res.data.user.photo,
+                  user_id: res.data.user._id
+                })
+              )})
+            dispatch(captureUser())
             toast.success('Loging In',{ duration: 1500})
             setTimeout(() => {
                 navigate('/')
-            }, 2000);
+            }, 2000)
         } catch (error) {
             toast.error(error.response.data.message)    
         }

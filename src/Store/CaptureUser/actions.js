@@ -5,11 +5,11 @@ let captureUser =createAsyncThunk("captureUser",
 async()=>{
     let token = localStorage.getItem("token");
     let headers = { headers: { Authorization: `Bearer ${token}` } };
-    let url = "https://minga-0gy1.onrender.com/auth/user";
+    let url = "http://localhost:8080/api/users/me";
     try {
         if(token){
             let res = await axios.get(url, headers);
-            return { user: res.data.data}
+            return { user: res.data.user}
         }else{return {user:[]}}
         
     } catch (error) {
