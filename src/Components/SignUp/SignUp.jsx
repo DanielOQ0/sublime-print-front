@@ -40,7 +40,7 @@ export default function SignUp() {
     return (
     <div>
         <div className="bg-gray-300 min-h-screen flex flex-col">
-            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
+            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center w-full max-w-md justify-center px-2">
                 <motion.div
                     initial={{y:200}}
                     animate={{y:0, duration:2}}
