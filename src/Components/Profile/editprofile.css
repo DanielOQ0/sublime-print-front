@@ -34,6 +34,7 @@ label {
     flex-direction: column;
     margin-bottom: 1rem;
     width: 100%;
+    
 }
 
 select.input-select {
@@ -110,6 +111,24 @@ select.input-select:focus {
     background: linear-gradient(285deg, rgba(255,255,255,0.5) 0%,  rgba(43, 236, 124, 0.5) 50%);
 }
 
+.avatar {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    /* border: 1px solid red; */
+   
+}
+
+.img-photo-edit{
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+   /*  border: 2px solid blue; */
+}
+
+
+
 
 @media screen and (min-width: 475px) {
     .input-container,
@@ -168,11 +187,13 @@ select.input-select:focus {
 }
 
 .profile .avatar {
-    width: 10rem;
-    height: 10rem;
+    width: 150px;
+    height: 150px;
     background-color: thistle;
     border-radius: 50%;
     margin-bottom: 1rem;
+   /*  border: 1px solid red; */
+
 }
 
 
