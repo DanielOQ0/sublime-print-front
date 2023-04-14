@@ -11,6 +11,7 @@ import './NavBar.css'
 import { Link as Anchor, useNavigate } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Cart from '../Cart/Cart'
+import { useSelector } from 'react-redux'
 
 const products = [
   { name: 'Design', description: 'Design a wide variety of products in your style', href: '/design', icon: PencilSquareIcon },
@@ -27,8 +28,8 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const changeUser = useSelector(store=>store.user.user)
   let token = localStorage.getItem("token")
-
   return (
     <header className="header z-10">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">

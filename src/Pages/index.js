@@ -12,6 +12,7 @@ import ColorsTextures from "./ColorsTextures/ColorsTextures"
 import LogIn from "../Components/LogIn/LogIn";
 import Profile from "./Profile/ProfileUser"
 import ProfileEdit from "./Profile/ProfileEdit";
+import Design from "./Design/Design";
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +29,11 @@ export const router = createBrowserRouter([
       {path: "/company",element: <Company/>,}, 
       {path: "/contact",element: <Contact />,},
       {path: "/colors-textures",element: <ColorsTextures />,},
-      { path: "/signup", element: <SignUp />},
-      { path: "/login", element: <LogIn />}, 
-      { path: "/profile", element: <Profile/>},
-      { path: "/profile-edit", element: <ProfileEdit/>},
+      {path: "/signup", element: <SignUp />},
+      {path: "/login", element: <LogIn />}, 
+      {path: "/profile", element: <Profile/>},
+      {path: "/profile-edit", element: <ProfileEdit/>},
+      {path: "/design", element: <Design/>},
       {path: "/*",element: <NotFound />,},
       
     ],
