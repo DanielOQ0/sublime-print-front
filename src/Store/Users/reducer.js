@@ -1,18 +1,17 @@
 import { createReducer } from "@reduxjs/toolkit";
 import actions from "./actions";
-const {captureDetails} = actions
+const {captureUser} = actions
 
 const initialState = {
-    details: false,
-    product: [],
+
+   user:[],
 }
 
 const reducer = createReducer(initialState, (builder) =>
-    builder.addCase(captureDetails, (state, action) =>{
+    builder.addCase(captureUser, (state, action) =>{
         let newState = {
             ...state,
-            details: action.payload.details,
-            product: action.payload.product
+           user:action.payload.user
         };
         return newState
         })

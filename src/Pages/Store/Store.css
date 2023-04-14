@@ -11,3 +11,8 @@
 .containerProductCard{
     max-width: 280px;
 }
+.container-spinner-store{
+    height: 50vh;
+    display: flex;
+    align-items: center;
+}
