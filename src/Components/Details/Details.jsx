@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const { captureDetails } = detailsAction;
 
@@ -19,7 +20,7 @@ export default function Details({product}) {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(true)
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0])
   const [isLoading, setIsLoading] = useState(false);
   let token = localStorage.getItem("token")
   let headers = { headers: { Authorization: `Bearer ${token}` } };
@@ -35,13 +36,19 @@ export default function Details({product}) {
     e.target.disabled=true
     setIsLoading(true);
     let url ='http://localhost:8080/api/cart/'+product._id
-    axios.post(url,null,headers)
+    let color = selectedColor? selectedColor.name : ""
+    let size = selectedSize? selectedSize.name : ""
+    let body = {color:color, size:size}
+    axios.post(url,body,headers)
     .then((res)=>{
       setIsLoading(false);
+      toast.success('Product added to bag')
       e.target.disabled=false
     })
     .catch((error)=>{
-      console.log(error);
+      if(error.response.data.message==="Product is already in the bag"){
+        toast(error.response.data.message, {icon:'👉',})
+      }else{toast.error(error.response.data.message)}
       setIsLoading(false);
       e.target.disabled=false
     })

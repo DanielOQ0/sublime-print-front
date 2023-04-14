@@ -201,7 +201,7 @@ export default function NavBar() {
                 >
                   Company
                 </Anchor>
-                <Cart cla="flex items-center justify-start py-8"/>
+                {token?<Cart cla="flex items-center justify-start py-8"/>:null}
               </div>
               <div className="py-6">
                 {!token?
