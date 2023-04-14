@@ -19,16 +19,15 @@ export default function ProfileInfo() {
   return (
     <Popover open={openPopover} handler={setOpenPopover}>
       <PopoverHandler {...triggers}>
-        <Button variant="text">Profile Info</Button>
-      </PopoverHandler>
-      <PopoverContent {...triggers} className="max-w-[24rem]">
-        <div className="mb-2 flex items-center justify-between gap-4">
-          <Avatar
+        <Avatar
             size="md"
             variant="circular"
             src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
             alt="candice wu"
           />
+      </PopoverHandler>
+      <PopoverContent {...triggers} className="max-w-[24rem]">
+        <div className="mb-2 flex items-center justify-between gap-4">
           <Button
             variant="gradient"
             color="blue"

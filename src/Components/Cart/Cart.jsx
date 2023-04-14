@@ -24,18 +24,26 @@ function Cart({cla}) {
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
 
-    let productsId = products.map((e) => {
+    let productsIds = products.map((e) => {
         return e._id
     })
-    const payments = [
+
+    let productsNames = products.map((e) => {
+        return e.product_id.name
+    })
+    
+    const payments = 
         {
-            currency_id: "ARS",
-            price: `${summary.total}`,
+            id : productsIds.join(),
+            name : productsNames.join(),
+            price: summary.total,
         }
-    ];
-        function handlePayments() {
-        axios.post("https://localhost:8080/api/payments", payments, headers)
-            .then( res => window.location.href = res.data.response.body.init_point);           
+
+    console.log(payments);
+    function handlePayments() {
+        axios.post('http://localhost:8080/api/payments',payments, headers)
+        .then( (res) => {window.location.href = res.data.response.body.init_point})
+        .catch((error)=>{ console.log(error);})     
     }
     
     useEffect(()=>{
