@@ -24,47 +24,6 @@ export default function ProductCard({product}) {
             <p className="text-sm font-medium text-gray-900">$ {product.price}</p>
         </div>
         
-    </div>
+    </div> 
   )
 }
-
-
-
-  
-
-    
-
-
-    
-
-/* <div className='bodyG'>
-        <div className="containerg product">
-
-        <img className="productImage productImg" src={product.image} alt={"image "+product.name} id={product._id}/>
-        
-        <div class="size productSize">
-            <h4 className='h4'>SIZE</h4>
-            <ul className='ul'>
-            <li className='li'>9</li>
-            <li className='li'>8</li>
-            <li className='li'>7</li>
-            </ul>
-        </div>
-        <div class="price productPrice">
-            <h4 className='h4'>PRICE</h4>
-            <span className='span'>{product.price}</span>
-        </div>
-        <div class="color productColor">
-            <h4 className='h4'>COLORS</h4>
-            <ul className='ul'>
-            <li className='li'><span className="blue"></span></li>
-            <li className='li'><span className="yellow"></span></li>
-            <li className='li'><span className="red"></span></li>
-            </ul>
-        </div>
-        <div class="productName productName">
-          {product.name}
-        </div>
-        </div>
-
-    </div> */

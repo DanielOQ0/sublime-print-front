@@ -9,6 +9,7 @@ import detailsAction from "../../Store/Details/actions";
 import Details from '../../Components/Details/Details';
 import { motion } from 'framer-motion';
 import axios from 'axios'
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner'
 
 
 const { captureDetails } = detailsAction;
@@ -83,6 +84,7 @@ export default function Store() {
     const [render,setRender] = useState(false)
     const [filter,setFilter] = useState(false)
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch()
     let openDetails = useSelector(store=>store.details.details)
     let token = localStorage.getItem("token")
@@ -108,8 +110,8 @@ export default function Store() {
     },[])
 
     useEffect(()=>{//Traer productos con filtros
+      setIsLoading(true)
       let url='http://localhost:8080/api/products?page='+page+'&quantity='+quantity+'&category='+categories.join()+'&sort='+sort
-      console.log(url);
       axios.get(url,headers)
       .then((res)=>{
         products=res.data.products
@@ -120,9 +122,13 @@ export default function Store() {
           pagination.push({class:pageClassActive,value:i+1}):
           pagination.push({class:pageClassDisactive,value:i+1})
         }
+        setIsLoading(false)
         setRender(!render)
       })
-      .catch((error)=>console.log(error))
+      .catch((error)=>{
+        setIsLoading(false)
+        console.log(error)
+      })
     },[filter])
 
     ///Funciones
@@ -152,12 +158,13 @@ export default function Store() {
       }
       setFilter(!filter)
     }
-    function handleCategory(e){
+    function handleCategory(e){ 
       if(e.target.checked){
         categories.push(e.target.value)
       }else{
         categories = categories.filter((each) => each !== e.target.value)
       }
+      page=1;
       setFilter(!filter)
     }
     function handleSort(e){
@@ -457,7 +464,8 @@ export default function Store() {
                 initial="hidden"
                 animate="visible"
                 >
-                    {products?.map((product) => (
+                    {isLoading? <div className='container-spinner-store'><LoadingSpinner/></div>:
+                    products?.map((product) => (
                         <motion.li 
                         variants={item}
                         key={product._id} 

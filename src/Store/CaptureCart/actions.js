@@ -1,22 +1,22 @@
 import {  createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-let captureUser =createAsyncThunk("captureUser",
+let captureCart =createAsyncThunk("captureCart",
 async()=>{
     let token = localStorage.getItem("token");
     let headers = { headers: { Authorization: `Bearer ${token}` } };
-    let url = "http://localhost:8080/api/users/me";
+    let url = 'http://localhost:8080/api/cart'
     try {
         if(token){
             let res = await axios.get(url, headers);
-            return { user: res.data.user}
-        }else{return {user:[]}}
+            return { cart: res.data.cart }
+        }else{return {cart:[]}}
         
     } catch (error) {
-        return {user:[]}
+        return {cart:[]}
     }
     
 })
-const actions = { captureUser }
+const actions = { captureCart }
 
 export default actions 

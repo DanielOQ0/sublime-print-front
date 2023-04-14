@@ -11,10 +11,11 @@ import './NavBar.css'
 import { Link as Anchor, useNavigate } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Cart from '../Cart/Cart'
+import { useSelector } from 'react-redux'
 
 const products = [
-  { name: 'Design', description: 'Get a better understanding of your traffic', href: '/design', icon: PencilSquareIcon },
-  { name: 'Store', description: 'Speak directly to your customers', href: '/store', icon: BuildingStorefrontIcon },
+  { name: 'Design', description: 'Design a wide variety of products in your style', href: '/design', icon: PencilSquareIcon },
+  { name: 'Store', description: 'Great variety of product and the best price', href: '/store', icon: BuildingStorefrontIcon },
 ]
 const callsToAction = [
   { name: 'Tutorials Design', href: '/tutorial', icon: PlayCircleIcon },
@@ -27,7 +28,8 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+  const changeUser = useSelector(store=>store.user.user)
+  let token = localStorage.getItem("token")
   return (
     <header className="header z-10">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -119,10 +121,10 @@ export default function NavBar() {
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
+          {!token?<Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
             Sing up <span aria-hidden="true">&rarr;</span>
-          </Anchor>
-          <Cart/>
+          </Anchor>:
+          <Cart cla="flex items-center justify-center py-8"/>}
         </div>
         
       </nav>
@@ -139,14 +141,12 @@ export default function NavBar() {
         >
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <Anchor to="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
                 className="logo2"
                 src={require("../../Media/logo.png")}
                 alt=""
               />
-            </Anchor>
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -202,15 +202,17 @@ export default function NavBar() {
                 >
                   Company
                 </Anchor>
+                {token?<Cart cla="flex items-center justify-start py-8"/>:null}
               </div>
               <div className="py-6">
+                {!token?
                 <Anchor
                   to="/signup"
                   className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
                   Sign up
-                </Anchor>
-                <Cart/>
+                </Anchor>:
+                null}
               </div>
             </div>
           </div>
