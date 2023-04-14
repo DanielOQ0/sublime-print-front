@@ -13,8 +13,8 @@ import { motion, useScroll, useSpring } from 'framer-motion'
 import Cart from '../Cart/Cart'
 
 const products = [
-  { name: 'Design', description: 'Get a better understanding of your traffic', href: '/design', icon: PencilSquareIcon },
-  { name: 'Store', description: 'Speak directly to your customers', href: '/store', icon: BuildingStorefrontIcon },
+  { name: 'Design', description: 'Design a wide variety of products in your style', href: '/design', icon: PencilSquareIcon },
+  { name: 'Store', description: 'Great variety of product and the best price', href: '/store', icon: BuildingStorefrontIcon },
 ]
 const callsToAction = [
   { name: 'Tutorials Design', href: '/tutorial', icon: PlayCircleIcon },
