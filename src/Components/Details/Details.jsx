@@ -5,6 +5,9 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import detailsAction from "../../Store/Details/actions";
 import { useDispatch } from 'react-redux';
 import { motion } from 'framer-motion';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import axios from 'axios';
+import { toast } from 'react-hot-toast';
 
 const { captureDetails } = detailsAction;
 
@@ -17,14 +20,39 @@ export default function Details({product}) {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(true)
   const [selectedColor, setSelectedColor] = useState(product.colors[0])
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+  const [selectedSize, setSelectedSize] = useState(product.sizes[0])
+  const [isLoading, setIsLoading] = useState(false);
+  let token = localStorage.getItem("token")
+  let headers = { headers: { Authorization: `Bearer ${token}` } };
+  
+  if(!open){
+    setTimeout(() => {
+      dispatch(captureDetails({details:false}))
+    }, 500);
+    
+  }
 
-    if(!open){
-      setTimeout(() => {
-        dispatch(captureDetails({details:false}))
-      }, 500);
-      
-    }
+  function handleAdd(e){
+    e.target.disabled=true
+    setIsLoading(true);
+    let url ='http://localhost:8080/api/cart/'+product._id
+    let color = selectedColor? selectedColor.name : ""
+    let size = selectedSize? selectedSize.name : ""
+    let body = {color:color, size:size}
+    axios.post(url,body,headers)
+    .then((res)=>{
+      setIsLoading(false);
+      toast.success('Product added to bag')
+      e.target.disabled=false
+    })
+    .catch((error)=>{
+      if(error.response.data.message==="Product is already in the bag"){
+        toast(error.response.data.message, {icon:'👉',})
+      }else{toast.error(error.response.data.message)}
+      setIsLoading(false);
+      e.target.disabled=false
+    })
+  }
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -217,10 +245,11 @@ export default function Details({product}) {
                           </div>}
 
                           <button
-                            type="submit"
-                            className="mt-6 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            type="button"
+                            className="mt-6 flex w-full h-15 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            onClick={handleAdd}
                           >
-                            Add to bag
+                            {isLoading? <LoadingSpinner size={"small"}/>: <p>Add to bag</p>}
                           </button>
                         </form>
                       </section>
