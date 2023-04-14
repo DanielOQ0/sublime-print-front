@@ -3,7 +3,8 @@ import detailsReducer from './Details/reducer'
 import cartReducer from './CaptureCart/reducer'
 import priceReducer from './ChangePrice/reducer'
 import captureUser from './Users/reducer'
-import userReducer from './CaptureUser/reducer'
+import checkoutMP from "./CheckoutMP/reducer"
+import userReducer from './CaptureUser/reducer"
 
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
     cart: cartReducer,
     price: priceReducer,
     users: captureUser,
+    mercadopago: checkoutMP
     user: userReducer,
   },
 });

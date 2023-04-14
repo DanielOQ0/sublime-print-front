@@ -7,6 +7,7 @@ import BagCard from "../BagCard/BagCard";
 import { useDispatch, useSelector } from "react-redux";
 import cartActions from "../../Store/CaptureCart/actions"
 import priceActions from "../../Store/ChangePrice/actions"
+import axios from "axios";
 
 const { changePrice } = priceActions
 const { captureCart } = cartActions
@@ -20,6 +21,22 @@ function Cart({cla}) {
     let dispatch = useDispatch();
     products = useSelector(store=>store.cart.cart)
     let summary= useSelector(store=>store.price)
+    let token = localStorage.getItem("token")
+    let headers = { headers: { Authorization: `Bearer ${token}` } };
+
+    let productsId = products.map((e) => {
+        return e._id
+    })
+    const payments = [
+        {
+            currency_id: "ARS",
+            price: `${summary.total}`,
+        }
+    ];
+        function handlePayments() {
+        axios.post("https://localhost:8080/api/payments", payments, headers)
+            .then( res => window.location.href = res.data.response.body.init_point);           
+    }
     
     useEffect(()=>{
         dispatch(changePrice())
@@ -37,10 +54,6 @@ function Cart({cla}) {
         })
     }
 
-    function handlePay(){
-        setShow(!show)
-        //ir a pagar por mercado libre
-    }
 
     return (
         <>
@@ -100,8 +113,9 @@ function Cart({cla}) {
                                             <p className="text-2xl leading-normal text-gray-800">Total</p>
                                             <p className="text-2xl font-bold leading-normal text-right text-gray-800">$ {summary.total}</p>
                                         </div>
-                                        <button onClick={handlePay} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
-                                            Go pay
+                                        <button onClick={handlePayments}
+                                                             className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                                Go pay
                                         </button>
                                     </div>
                                 </div>
@@ -116,3 +130,4 @@ function Cart({cla}) {
 }
 
 export default Cart;
+
