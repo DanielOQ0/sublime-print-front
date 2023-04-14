@@ -1,6 +1,74 @@
 .containerCart{
     z-index: 200;
 }
+.modal{
+    position: fixed;
+    margin-left: 0;
+    top: 0vh;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+    color: #000000;
+}
+.modal .payCard{
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+    border-radius: 25px;
+}
+.modal .payCard h2{
+    text-align: center;
+}
+.modal .payCard .modal-bottom{
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+}
+.modal .payCard .modal-bottom .paymentBtn{
+    text-decoration: none;
+    background: rgb(41, 202, 108);
+    width: 95px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+    border-radius: 5px;
+    color: #ffffff;
+    font-weight: 100;
+    font-size: 13px;
+    cursor: pointer;
+}
+.modal .payCard .payment-close{
+    text-decoration: none;
+    background: rgb(209, 210, 243);
+    width: 80px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
+    border-radius: 5px;
+    color: #2341e7;
+    font-weight: 100;
+    font-size: 13px;
+    cursor: pointer;
+}
 .spinner-container-cart{
     margin-top: 10rem;
 }
