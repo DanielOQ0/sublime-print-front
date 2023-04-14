@@ -1,30 +1,26 @@
 import React from 'react'
 import './profile.css'
-import { Link, useNavigate } from 'react-router-dom'
-import { useEffect,useState } from 'react'
-import axios from 'axios'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
+import userActions from "../../Store/CaptureUser/actions"
+const { captureUser } = userActions
 
 
 
 export default function Profile() {
 
-    let token = localStorage.getItem("token")
-    let headers = { headers: { Authorization: `Bearer ${token}` } };
-
-    let [user, setUser] = useState({});
+    let dispatch = useDispatch()
 
     useEffect(() => { 
-        axios.get('http://localhost:8080/api/users/me', headers)
-        .then(res => { 
-            setUser(res.data.user); 
-        });
-        }, 
-        []
+      dispatch(captureUser())
+      },[]
     );
 
+    let user = useSelector(store => store.user.user)
+   // console.log(user)
     return (
     <div>
-       
         <main className="profile-page">
             <section className="relative py-60 bg-blueGray-200">
                 <div className="container mx-auto px-4">
@@ -34,7 +30,7 @@ export default function Profile() {
 
                             <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                 <div className="image-profile"> 
-                                    <img alt="..." src={user.photo} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"/>
+                                    <img alt="..." src={user.photo} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px img-photo"/>
                                 </div>
                             </div>
                             
@@ -71,18 +67,9 @@ export default function Profile() {
                         </div>
                     </div>
                 </div>
-            
             </section>
         </main>
 
     </div>
   ) 
 }
-
-
- /* useEffect(() => { 
-        axios.get('http://localhost:8080/api/users/me',headers)
-        .then((res)=>{ console.log(res.data.user.name) })
-       
-           
-    }) */
