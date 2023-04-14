@@ -1,7 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit"
 import actions from './actions'
 
-const { captureUser } = actions
+const { captureUser, updateUser } = actions
 const initialstate = {
     user:[]
 }
@@ -14,6 +14,16 @@ const reducer = createReducer(initialstate,
             let newState={
                 ...state,
                 user:action.payload.user
+            }
+            return newState
+        }
+    )
+    .addCase(
+        updateUser.fulfilled,
+        (state, actions)=>{
+            let newState ={
+                ...state,
+                user: actions.payload.user
             }
             return newState
         }
