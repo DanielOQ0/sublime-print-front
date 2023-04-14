@@ -121,7 +121,7 @@ export default function NavBar() {
             </motion.p>
           </Anchor>
         </Popover.Group>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center">
           {!token?<Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
             Sing up <span aria-hidden="true">&rarr;</span>
           </Anchor>:<>
@@ -143,11 +143,11 @@ export default function NavBar() {
         <Dialog.Panel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
               <span className="sr-only">Your Company</span>
-              <img
+              {!token?<img
                 className="logo2"
                 src={require("../../Media/logo.png")}
                 alt=""
-              />
+              />:<ProfileInfo/>}
             <button
               type="button"
               className="-m-2.5 rounded-md p-2.5 text-gray-700"
