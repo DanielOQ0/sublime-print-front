@@ -9,6 +9,31 @@ function Cart({cla}) {
     const [show, setShow] = useState(false);
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
+    let [renderModal, setRenderModal] = useState(false)
+
+    const payments = [
+        {
+            id: "64370db045febdab73c4d1ec",
+            title: "Go to buy",
+            currency_id: "ARS",
+            price: 1000,
+            quantity: 1
+        }
+    ];
+
+    function handlePayments(pay) {
+        let paymentData = payments.filter( payment => payment.id == pay.target.id)
+        axios.post("https://localhost:8080/api/payments", paymentData, headers)
+            .then( res => window.location.href = res.data.response.body.init_point);           
+    }
+
+    function handleOpenPayments(){
+        setRenderModal(!renderModal)
+    }
+
+    function handleClosePayments(){
+        setRenderModal(!renderModal)
+    }
 
     function handleOpen(){
         setShow(!show)
@@ -95,15 +120,20 @@ function Cart({cla}) {
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
                                                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">$</p>
                                             </div>
-                                            <button onClick={() => setShow(!show)} className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                            <button onClick={() => {
+                                                                setShow(!show);
+                                                                handleOpenPayments();
+                                                            }}
+                                                             className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 Checkout
                                             </button>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>      
                 )}
             </div>
 
@@ -124,6 +154,20 @@ function Cart({cla}) {
                 }
 `}
             </style>
+            {renderModal ? <div className='modal'>
+                                            <div className='payCard'>
+                                            <h2>Continue to select a payment method and complete the purchase</h2>
+                                                <div className='modal-bottom'>
+                                            {
+                                            payments.map( (payment,i) =>{
+                                    let card = <p id={payment.id} className='paymentBtn' key={i} onClick={handlePayments}>{payment.title}</p>
+                                    return card
+                                })
+                            }
+                        </div>
+                        <p className='payment-close' onClick={handleClosePayments}>Cancel</p>
+                    </div> 
+                </div> : "" }
         </>
     );
 }
