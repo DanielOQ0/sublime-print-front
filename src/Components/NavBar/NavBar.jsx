@@ -12,6 +12,7 @@ import { Link as Anchor, useNavigate } from "react-router-dom";
 import { motion, useScroll, useSpring } from 'framer-motion'
 import Cart from '../Cart/Cart'
 import { useSelector } from 'react-redux'
+import ProfileInfo from '../ProfileInfo/ProfileInfo'
 
 const products = [
   { name: 'Design', description: 'Design a wide variety of products in your style', href: '/design', icon: PencilSquareIcon },
@@ -123,8 +124,8 @@ export default function NavBar() {
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           {!token?<Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
             Sing up <span aria-hidden="true">&rarr;</span>
-          </Anchor>:
-          <Cart cla="flex items-center justify-center py-8"/>}
+          </Anchor>:<>
+          <Cart cla="flex items-center justify-center py-8"/> <ProfileInfo/></>}
         </div>
         
       </nav>
