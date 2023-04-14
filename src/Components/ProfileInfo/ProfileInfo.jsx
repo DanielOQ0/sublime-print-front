@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { ArrowLeftOnRectangleIcon, UserIcon } from "@heroicons/react/24/outline";
 import { Link as Anchor, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import userActions from "../../Store/CaptureUser/actions"
 import axios from "axios";
 import { toast } from "react-hot-toast";
@@ -25,8 +25,10 @@ export default function ProfileInfo() {
     onMouseLeave: () => setOpenPopover(false),
   };
   const token = localStorage.getItem("token");
-  const user = token? JSON.parse(localStorage.getItem(`user`)): ""
- 
+  const user = useSelector(store=>store.user.user)
+  if(user.length===0){
+    dispatch(captureUser())
+  }
   async function handleLogout(){
     try {
         let headers = { headers: { Authorization: `Bearer ${token}` } };
