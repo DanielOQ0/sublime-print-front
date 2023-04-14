@@ -24,7 +24,11 @@ export default function ProductCard({product}) {
             <p className="text-sm font-medium text-gray-900">$ {product.price}</p>
         </div>
         
-    </div> 
+    </div>
+
+    
+
+    
   )
 }
 
@@ -32,7 +36,12 @@ export default function ProductCard({product}) {
 
   
 
-    {/* <div className='bodyG'>
+    
+
+
+    
+
+/* <div className='bodyG'>
         <div className="containerg product">
 
         <img className="productImage productImg" src={product.image} alt={"image "+product.name} id={product._id}/>
@@ -62,6 +71,4 @@ export default function ProductCard({product}) {
         </div>
         </div>
 
-    </div> */}
-
-
+    </div> */

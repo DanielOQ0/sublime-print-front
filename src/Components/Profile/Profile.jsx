@@ -11,20 +11,20 @@ export default function Profile() {
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
 
-    let [user, setUser] = useState([]);
+    let [user, setUser] = useState({});
 
     useEffect(() => { 
         axios.get('http://localhost:8080/api/users/me', headers)
-            .then(res => { 
-                setUser(res.data.user); 
-            });    
-    }, []);
+        .then(res => { 
+            setUser(res.data.user); 
+        });
+        }, 
+        []
+    );
 
-    
-
-  return (
+    return (
     <div>
-        <h2>aaaahhhhh</h2>
+       
         <main className="profile-page">
             <section className="relative py-60 bg-blueGray-200">
                 <div className="container mx-auto px-4">
@@ -34,7 +34,7 @@ export default function Profile() {
 
                             <div className="w-full lg:w-3/12 px-4 lg:order-2 flex justify-center">
                                 <div className="image-profile"> 
-                                    <img alt="..." src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg" className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"/>
+                                    <img alt="..." src={user.photo} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"/>
                                 </div>
                             </div>
                             
@@ -47,23 +47,24 @@ export default function Profile() {
                             </div>
                             <div className="w-full lg:w-4/12 px-4 lg:order-1">
                             <div className="flex justify-center py-4 lg:pt-4 pt-8">
-                    
+                                
                             </div>
+                            
                             </div>
                         </div>
                         <div className="text-center mt-12 p-16">
                             <h3 className="text-4xl font-semibold leading-normal  text-blueGray-700 mb-2">
-                            
+                            {user.name}
                             </h3>
                             <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                             <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                            Los Angeles, California
+                            {user.email}
                             </div>
                             <div className="mb-2 text-blueGray-600 mt-10">
-                            <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>Solution Manager - Creative Tim Officer
+                            <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>{user.name}
                             </div>
                             <div className="mb-2 text-blueGray-600">
-                            <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>University of Computer Science
+                            <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>{user.name}
                             </div>
                         </div>
                       
@@ -75,7 +76,7 @@ export default function Profile() {
         </main>
 
     </div>
-  )
+  ) 
 }
 
 
