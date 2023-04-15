@@ -8,7 +8,9 @@ import { motion } from 'framer-motion';
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import priceActions from "../../Store/ChangePrice/actions"
 
+const { changePrice } = priceActions
 const { captureDetails } = detailsAction;
 
 function classNames(...classes) {
@@ -43,10 +45,12 @@ export default function Details({product}) {
     .then((res)=>{
       setIsLoading(false);
       toast.success('Product added to bag')
+      dispatch(changePrice())
       e.target.disabled=false
     })
     .catch((error)=>{
       if(error.response.data.message==="Product is already in the bag"){
+        dispatch(changePrice())
         toast(error.response.data.message, {icon:'👉',})
       }else{toast.error(error.response.data.message)}
       setIsLoading(false);
