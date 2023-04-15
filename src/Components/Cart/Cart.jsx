@@ -20,6 +20,7 @@ function Cart({cla}) {
     const [isLoading, setIsLoading] = useState(false);
     let dispatch = useDispatch();
     products = useSelector(store=>store.cart.cart)
+    console.log(products)
     let summary= useSelector(store=>store.price)
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
@@ -40,7 +41,6 @@ function Cart({cla}) {
             price: summary.total,
         }
 
-    // console.log(payments);
     function handlePayments() {
         axios.post('http://localhost:8080/api/payments',payments, headers)
         .then( (res) => {window.location.href = res.data.response.body.init_point})
