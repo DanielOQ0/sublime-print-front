@@ -1,0 +1,91 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import './stock.css'
+
+export default function Stock() {
+
+    let token = localStorage.getItem("token")
+    let headers = { headers: { Authorization: `Bearer ${token}` } };
+    const [products, setProducts] = useState([]);
+    const [edit, setEdit] = useState([]);
+
+  useEffect(() => { 
+    axios.get('http://localhost:8080/api/products', headers)
+      .then(res => { 
+        console.log(res.data.products)
+        setProducts(res.data.products);
+      });
+  }, []); 
+
+
+
+  const handleDelete = (id) => {
+    axios.delete(`http://localhost:8080/api/products/${id}`, headers)
+      .then(res => {
+        setProducts(products.filter(product => product._id !== id));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+   };
+
+   const handleEditStock = (event, id) => {
+    const newProducts = [...products];
+    const index = products.findIndex(product => product._id === id);
+    newProducts[index].stock = parseInt(event.target.value);
+    setEdit(newProducts);
+  };
+
+  const handleUpdateStock = (id) => {
+    const product = edit.find(product => product._id === id);
+    axios.put(`http://localhost:8080/api/products/${id}`, { stock: product.stock }, headers)
+      .then(res => {
+        const updatedProduct = res.data.product;
+        setProducts(products.map(product => {
+          if (product._id === updatedProduct._id) {
+            return updatedProduct;
+          }
+          return product;
+        }));
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
+
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+            <th>STOCK</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product, index) => (
+            <tr key={index}>
+              <td>{product._id}</td>
+              <td>{product.name}</td>
+              <td>{product.price}</td>
+              <td>
+                <input type="number" value={product.stock} onChange={(event) => handleEditStock(event, product._id)} />
+                
+              </td>
+              <td>
+               <button onClick={() => handleUpdateStock(product._id)}>Guardar</button>
+              </td>
+              <td>
+                <button onClick={() => handleDelete(product._id)}>DELETE</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+

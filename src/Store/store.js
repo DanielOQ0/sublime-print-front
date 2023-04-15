@@ -4,6 +4,7 @@ import cartReducer from './CaptureCart/reducer'
 import priceReducer from './ChangePrice/reducer'
 import captureUser from './Users/reducer'
 import userReducer from './CaptureUser/reducer'
+import productReducer from './Products/reducer'
 
 
 export const store = configureStore({
@@ -13,5 +14,6 @@ export const store = configureStore({
     price: priceReducer,
     users: captureUser,
     user: userReducer,
+    product:productReducer
   },
 });
