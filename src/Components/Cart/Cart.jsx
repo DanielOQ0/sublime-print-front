@@ -31,11 +31,12 @@ function Cart({cla}) {
     let productsNames = products.map((e) => {
         return e.product_id.name
     })
-    
+    console.log(productsNames)
     const payments = 
         {
             id : productsIds.join(),
             name : productsNames.join(),
+            currency_id: "ARS",
             price: summary.total,
         }
 
