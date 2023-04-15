@@ -40,7 +40,7 @@ function Cart({cla}) {
             price: summary.total,
         }
 
-    console.log(payments);
+    // console.log(payments);
     function handlePayments() {
         axios.post('http://localhost:8080/api/payments',payments, headers)
         .then( (res) => {window.location.href = res.data.response.body.init_point})
