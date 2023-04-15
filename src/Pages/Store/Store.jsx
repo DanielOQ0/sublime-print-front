@@ -262,10 +262,15 @@ export default function Store() {
                               </Disclosure.Button>
                             </h3>
                             <Disclosure.Panel className="pt-6">
-                              <div className="space-y-6">
+                              <motion.div
+                              variants={containerFast}
+                              initial="hidden"
+                              animate="visible"
+                              className="space-y-6">
                                 {section.options.map((option, optionIdx) => (
-                                  <div key={option.value} className="flex items-center">
+                                  <motion.div variants={item} key={option.value} className="flex items-center">
                                     <input
+                                    onChange={handleCategory}
                                       id={`filter-mobile-${section.id}-${optionIdx}`}
                                       name={`${section.id}[]`}
                                       defaultValue={option.value}
@@ -279,9 +284,9 @@ export default function Store() {
                                     >
                                       {option.label}
                                     </label>
-                                  </div>
+                                  </motion.div>
                                 ))}
-                              </div>
+                              </motion.div>
                             </Disclosure.Panel>
                           </>
                         )}

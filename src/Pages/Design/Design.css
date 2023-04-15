@@ -1,0 +1,30 @@
+.container-design{
+    height: 75vh;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+}
+.container-tools-design{
+    height: 100%;
+    width: 40%;
+    overflow: hidden; /*overlay*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container-canva{
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 5px solid rgba(0, 0, 0, 0.2); */
+    box-shadow: inset 0px 0px 15px 3px rgba(0,0,0,0.1);
+    /* border-radius: 10px; */
+}
+.container-properties{
+    width: 90%;
+    height: 70%;
+    background-color: white;
+    overflow: auto; /*overlay*/
+    padding: 10px;
+}
