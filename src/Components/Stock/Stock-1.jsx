@@ -9,6 +9,10 @@ export default function Stock() {
     const [products, setProducts] = useState([]);
     const [edit, setEdit] = useState({});
 
+    const [search, setSearch] = useState(""); ///
+    const [searchResults, setSearchResults] = useState([]);///
+
+
     useEffect(() => { 
         axios.get('http://localhost:8080/api/products', headers)
             .then(res => { 
@@ -54,6 +58,15 @@ export default function Stock() {
             });
     };
 
+    const handleSearch = (event) => { /* -------------------------------- */
+        setSearch(event.target.value);
+        const results = products.filter((product) =>
+          product.name.toLowerCase().includes(event.target.value.toLowerCase())
+        );
+        setSearchResults(results);
+    };
+      
+
     return (
         <div>
            
@@ -64,6 +77,8 @@ export default function Stock() {
                         <th>NAME</th>
                         <th>PRICE</th>
                         <th>STOCK</th>
+                        <input type="text" value={search} onChange={handleSearch} />
+
                         <th> <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button></th>
                     </tr>
                 </thead>
@@ -90,6 +105,19 @@ export default function Stock() {
                     ))}
                 </tbody>
                 </table>
+
+                {searchResults.map((product, index) => ( /* -------------------------------- */
+                    <tr key={index}>
+                        <td>{product._id}</td>
+                        <td>{product.name}</td>
+                        <td>{product.price}</td>
+                        <td>{product.stock}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                ))}
     </div>
   );
 }
+
+

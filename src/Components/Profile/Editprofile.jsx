@@ -1,56 +1,67 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './editprofile.css'
-import { useRef, useEffect, useState } from 'react'
+import getUser from '../../Store/CaptureUser/actions'
+import { useDispatch, useSelector } from 'react-redux'
+import { Toaster, toast } from 'react-hot-toast'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { current } from '@reduxjs/toolkit'
+
+const { captureUser } = getUser
 
 export default function Editprofile() {
-    let token = localStorage.getItem("token")
+
+    let navigate = useNavigate()
+    let dispatch = useDispatch()
+    let user = useSelector(store => store.user.user)
+    let url = 'http://localhost:8080/api/users/'
+    let token = localStorage.getItem('token')
     let headers = { headers: { Authorization: `Bearer ${token}` } };
-
-    const editForm = useRef(); 
-    let [user, setUser] = useState({});
-
-    useEffect(() => { 
-        axios.get('http://localhost:8080/api/users/me', headers)
-        .then(res => { 
-            setUser(res.data.user); 
-        });
-        }, 
+    let name = useRef()
+    let file = useRef()
+    
+    useEffect(
+        () => {
+            dispatch(captureUser())
+        },
         []
-    );
+        )
 
-   
-    const handleAccept = async (event) => {
-        event.preventDefault();
-        const data = {
-            photo: editForm.current[0].value,
-            name: editForm.current[2].value,
+        const handleSubmit = async (e) => {
+            e.preventDefault()
+            const data = new FormData()
+            data.append('file',file.current.files[0])
+            data.append('name',name.current.value)
+        try {
+            await axios.put(url,data,headers)
+            toast.success('User successfully updated', { duration: 1500})
+            dispatch(captureUser())
+            navigate('/profile')
+            window.location.reload(true)
+        } catch (error) {
+            toast.error(error.response.data.message, { duration: 1500})
         }
-        console.log(data)
-    }
+    } 
 
-  return (
+return (
     <div className='profile'>
-     <div className="form-container">
-        <form ref={editForm}>
-
-           <div className="profile-box">
-               <h4 className="profile-subtitle">Edit Profile</h4>
-               <div className="avatar"><img  className="img-photo-edit" src={user.photo} alt="" /></div>
-               <div className="input-file-container">
-                    <input type="file" name="avatar" id=""/>
-               </div>
-           </div>
-
-           
-           <div className="profile-form">
+    <div className="form-container">
+        <form onSubmit={handleSubmit}>
+        <div className="profile-box">
+            <h4 className="profile-subtitle">Edit Profile</h4>
+            <div className="avatar"><img  className="img-photo-edit" src={user.photo} alt="" /></div>
+            <div className="input-file-container">
+                <input type="file" name="avatar" ref={file} />
+            </div>
+        </div>
+        <div className="profile-form">
                 <div className="profile-box">
                     <h4 className="profile-subtitle">Personal information</h4>
                     <div className="input-container">
-                        <input className="input-style" type="email" name="email" placeholder="Ingrese su email" defaultValue={user.email} readonly/>
+                        <input className="input-style" type="email" name="email" placeholder="Ingrese su email" defaultValue={user.email} readOnly />
                     </div>
                     <div className="input-container">
-                        <input className="input-style" type="text" name="name" placeholder="Name" defaultValue={user.name}/>
+                        <input className="input-style" type="text"  defaultValue={user.name}  ref={name}/>
                     </div>
                     {/* <div className="input-container">
                         <input className="input-style" type="text" name="lastname" placeholder="Last name"/>
@@ -59,28 +70,13 @@ export default function Editprofile() {
                         <input className="input-style" type="number" name="dni" placeholder="DNI"/>
                     </div> */}
                 </div>
-                {/* <div className="profile-box">
-                    <h4 className="profile-subtitle">Contact information</h4>
-                        <div className="input-container">
-                            <input className="input-style" type="tel" name="tel" placeholder="phone"/>
-                        </div>
-                        <div className="input-container">
-                            <input className="input-style" type="tel" name="tel" placeholder="phone"/>
-                        </div>
-                        <div className="input-container">
-                            <input className="input-style" type="tel" name="tel" placeholder="phone"/>
-                        </div>
-                      
-                        <div className="input-container">
-                            <input className="input-style" type="text" name="domicilio" placeholder="Street and number"/>
-                        </div>
-                </div> */}
-           </div>
+            </div>
             <div className="button-container">
-                <button type="submit" className="btn btn-edit" onClick={handleAccept} >Send</button>
+                <button type="submit" className="btn btn-edit" >Send</button>
             </div> 
         </form>
     </div>
+    <Toaster />
     </div>
-  )
+)
 }
