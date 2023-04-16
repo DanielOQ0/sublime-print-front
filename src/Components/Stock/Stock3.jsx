@@ -75,12 +75,12 @@ export default function Stock3() {
 								<li class="nav-item">
 									<a class="nav-link " href="media.php">USERS</a>
 								</li>
-								<li class="nav-item">
+								{/* <li class="nav-item">
 								<a class="nav-link active" href="posts.php">PRODUCTS</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link " href="media.php">USERS</a>
-								</li>	
+								</li> */}	
 							</ul>					
 					</nav>
 				</aside>
@@ -94,7 +94,7 @@ export default function Stock3() {
 						</header>
 						<section class="col-xl-10 col-md-10 offset-md-1 col-sm-12 mb-3">
 							<div>
-								<a class="btn btn-xs btn-info" href="new-post.php">Add New</a>
+								{/* <a class="btn btn-xs btn-info">Add New</a> */}
 								<hr />
 								<span class="float-right">
 									<form class="form-inline">
@@ -107,21 +107,23 @@ export default function Stock3() {
 									</form>
 								</span>
 								 <nav>
-									<a class="text-muted" href="posts.php">All (7)</a> |
-									<a class="text-muted" href="?published=true">Published (4)</a> |
-									<a class="text-muted" href="?published=false">Draft (3)</a>
+				
+									<a class="btn btn-xs btn-info">Add New</a>
+									<a class="btn btn-xs btn-info">Add New</a>
+									{/* <a class="text-muted" href="?published=true">Published (4)</a> |
+									<a class="text-muted" href="?published=false">Draft (3)</a> */}
 								</nav>
 							</div>
 							<br />
 							<div >
-								<table class="table table-striped table-sm comments">
+								<table class="table">{/* table table-striped table-sm comments */}
 									<thead>
 										<tr>
 											<th></th>
 											<th>Image</th>
 											<th>Name</th>
-											<th class="hidden-xs-down">Price</th>
-											<th class="hidden-xs-down">stock</th>
+											<th>Price</th>
+											<th>stock</th>
 											<th>ID</th>
 										</tr>
 									</thead>
@@ -129,28 +131,28 @@ export default function Stock3() {
 									{products.map((product, index) => (
 										<tr key={index}> {/* DATOS DINAMICOS */}
 											<td>
-											 <div class="form-check">
+											{/*  <div class="form-check">
 												<label class="form-check-label">
 													<input class="form-check-input" type="checkbox" name="check_list[]" value="1"/>
 												</label>
-											 </div>
+											 </div> */}
 											</td>
-											<td>
-												<img src={product.image} alt="Hello World"/>
+											<td className='data-product'>
+												<img src={product.image} alt={product.name} className='image'/>
 											</td>
-											<td>
-											<input type="text" name="name" value={edit[product._id]?.name || product.name} onChange={(event) => handleEdit(event, product._id)} />
+											<td className='data-product'>
+											<input type="text" name="name" value={edit[product._id]?.name || product.name} onChange={(event) => handleEdit(event, product._id)} className='data-product'/>
 											</td>
-											<td>
-											<input type="number" name="price" value={edit[product._id]?.price || product.price} onChange={(event) => handleEdit(event, product._id)} />
+											<td className='data-product'>
+											<input type="number" name="price" value={edit[product._id]?.price || product.price} onChange={(event) => handleEdit(event, product._id)} className='data-product'/>
 											</td>
-											<td>
-												<input type="number" name="stock" value={edit[product._id]?.stock || product.stock} onChange={(event) => handleEdit(event, product._id)} />
+											<td className='data-product'>
+												<input type="number" name="stock" value={edit[product._id]?.stock || product.stock} onChange={(event) => handleEdit(event, product._id)} className='data-product'/>
 											</td>
 											{/* <td>7</td>
 											<td>2017-02-23</td> */}
-											<td class="td-comments text-right">
-											  {product._id}
+											<td class="td-comments text-right" className='data-product'>
+											 {/*  {product._id} */}
 												{/* <button class="btn btn-xs btn-simple btn-outline-warning">
 													BOTON 1
 												</button> */}

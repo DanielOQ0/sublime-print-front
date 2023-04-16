@@ -5,15 +5,18 @@
 /* Bootstrap Classes */
 body > .container {
 	padding-top: 70px;
+	
 }
 
 body > .container-fluid {
 	padding-top: 50px;
+	
 }
 
 .card-dark {
 	background-color: #333;
 	border-color: #333;
+	
 }
 
 .card-block-icon {
@@ -107,6 +110,7 @@ h1.admin {
 	overflow-x: hidden;
 	overflow-y: auto;
 	border-right: 1px solid #eee;
+	border: 1px solid red;
 }
 
 .sidebar {
@@ -128,4 +132,22 @@ h1.admin {
 
 .sidebar .nav-link {
 	border-radius: 0;
+}
+
+.table{
+	/* border: 1px solid green; */
+}
+.image{
+	width: 7rem;
+	height: 7rem;
+	object-fit: cover;
+	border: 1px solid blue;
+}
+
+.data-product{
+	/* padding: auto; */
+	/* margin: auto; */
+	background-color: white;
+	margin-top: 0rem;
+	border: 1px solid blue;
 }

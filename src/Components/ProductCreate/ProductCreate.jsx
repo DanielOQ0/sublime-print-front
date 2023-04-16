@@ -1,91 +1,55 @@
-/* import React from 'react'
-import axios from 'axios';
+import React from 'react'
+import axios from "axios";
+import { useRef } from "react";
 
 export default function ProductCreate() {
-    const name = useRef();
-    const description = useRef();
-    const price = useRef();
-    const stock = useRef();
-    const sizes = useRef();
-    const colors = useRef();
-    
-    
 
-    useEffect(() => { 
-        axios.put('http://localhost:8080/api/products', headers)
-            .then(res => { 
-                console.log(res.data.products)
-            });
-    }, []); 
+  let token = localStorage.getItem("token")
+	let headers = { headers: { Authorization: `Bearer ${token}` } };
 
-   
+  const name = useRef();
+  const description = useRef();
+  const price = useRef();
+  const stock = useRef();
+  const category = useRef();
+  /* const image = useRef() */
 
-  return (
-    <div>
-        <form >
-            <label htmlFor="">
-              <input type="text" />
-            </label>
-            
-        </form>
-    </div>
-  )
-}
- */
+  const formRef = useRef();
 
-import React, { useState } from 'react';
-import axios from 'axios';
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let url = 'http://localhost:8080/api/products'
+    let formData = new FormData(formRef.current);
 
-export default function ProductCreate() {
-  const [status, setStatus] = useState('');
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const product = {
-      name: nameRef.current.value,
-      description: descriptionRef.current.value,
-      stock: stockRef.current.value,
-      price: priceRef.current.value
-     
-    };
+    let data = {
+      name: formData.get("name"),
+      description: formData.get("description"),
+      price: formData.get("price"),
+      stock: formData.get("stock"),
+      category: formData.get("category"),
+      /* image: formData.get("image"), */
+    }
 
     try {
-      await axios.post('http://localhost:8080/api/products', product);
-      setStatus('Product created successfully!');
+      const response = await axios.post(url, data, headers);
+      formRef.current.reset();
     } catch (error) {
-      setStatus('An error occurred while creating the product.');
+      console.error(error);
     }
-  };
-
-  const nameRef = React.createRef();
-  const descriptionRef = React.createRef();
-  const priceRef = React.createRef();
-  const stockRef = React.createRef();
-
+}
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input type="text" id="name" ref={nameRef} />
-
-        <label htmlFor="description">Description:</label>
-        <input type="text" id="description" ref={descriptionRef} />
-
-        <label htmlFor="stock">Stock:</label>
-        <input type="number" id="stock" ref={stockRef} />
-        <label htmlFor="price">Stock:</label>
-        <input type="number" id="price" ref={priceRef} />
-
-  
-
- 
-
-        <button type="submit">Create product</button>
-      </form>
-
-      {status && <p>{status}</p>}
-    </div>
-  );
+    <form ref={formRef} onSubmit={handleSubmit}>
+      <h1>New Product</h1>
+      <input ref={name} name="name" type="text" placeholder="Name" required/>
+      <input ref={description} name="description" type="text" placeholder="description" required/>
+      <input ref={price} name="price" type="text" placeholder="price" required />
+      <input ref={stock} name="stock" type="text" placeholder="stock" required/>
+      <input ref={category} name="category" type="select" placeholder="category" required/>
+      {/* <input ref={image} name="iamge" type="file" placeholder="image" required/> */}
+      <input type="submit" value="Send" />
+    </form>
+  </div>
+  )
 }
