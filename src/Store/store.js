@@ -15,5 +15,6 @@ export const store = configureStore({
     users: captureUser,
     mercadopago: checkoutMP,
     user: userReducer,
+   // product:productReducer
   },
 });
