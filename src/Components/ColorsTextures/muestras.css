@@ -1,0 +1,236 @@
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css';
+
+/* banner css */
+.banner {
+    background: url(https://image.spreadshirtmedia.net/content/f_png,w_780/cms/aboutus/thecompany/company_mainimage) no-repeat center center;
+    background-size: cover;
+    padding-top: 120px;
+    padding-bottom: 0px;
+    position: relative;
+    z-index: 1;
+}
+
+.banner::after{
+	content: "";
+	background: #f3f0f0de;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	height: 100%;
+	width: 100%;
+}
+.banner_content {
+    color: #000000;
+}
+
+.box_content {
+    color: #000000;  
+}
+
+.banner_content h1 {
+    font-size: 45px;
+    margin-top: -12px;
+    margin-bottom: 25px; 
+}
+
+button.cmn_btn {
+    color: #fff;
+    background: #bc1f60;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 20px;
+    margin-bottom: 100px;
+}
+
+
+.box_content span {
+    font-size: 49px;
+}
+
+.box_content h5 {
+    font-weight: lighter;
+    font-size: 22px;
+    margin: 21px;   
+}
+
+.box_content p {
+    color: #9a9292;  
+}
+.p-2.box_content2 {
+    background: #F5F5F5;
+}
+
+/* pink_content_area css */
+
+.pink_content_area{
+	background: #BC1F60;
+	height: 325px;
+}
+.pink_content_area .p-2{
+	background: none;
+}
+.address {
+    width: 200px;
+}
+
+.pink_content_area h4 {
+    font-size: 18px;
+}
+
+.pink_content_area span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.pink_content_area p {
+    font-size: 13px;
+}
+.address {
+    width: 200px;
+}
+
+.pink_content_area h4 {
+    font-size: 20px;
+}
+
+.pink_content_area span {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.pink_content_area p {
+    font-size: 13px;
+}
+.dayS {
+    float: left;
+    margin-left: -21px;
+    margin-right: 43px;
+    font-weight: bold;
+}
+
+.p-2.schedule ul li {
+    list-style: none;
+}
+
+/* alices_specials css */
+.card {
+    float: left;
+    width: 325px;
+    padding: 20px;
+    border: none;
+}
+
+.alices_specials_content {
+    margin: auto;
+    width: 1001px;
+}
+.alices_specials h4 {
+    font-size: 30px;
+}
+
+.alices_specials p {
+    font-size: 14px;
+}
+
+/* gingerbread_house_asterclass css */
+
+.gingerbread_house_asterclass{
+	background: #F5F5F5;
+}
+
+/* contact css */
+
+.contact{
+	background: #F5F5F5;
+}
+input.form-control.p-3.name {
+    width: 48%;
+    display: inline-block;
+    float: left;
+}
+
+input.form-control.p-3.email {
+    width: 48%;
+    float: right;
+}
+
+.form-control {
+    color: #000 !important;
+    border: none;
+    border-bottom: 1px solid #524f4f;
+    background: none;
+    margin-bottom: 20px;
+    border-radius: 0;
+}
+
+.contact_form {
+    width: 60%;
+    margin: auto;
+}
+
+button.btn.btn-dark {
+    font-size: 13px;
+    font-weight: bold;
+    border-radius: 25px;
+}
+button.btn.btn-dark.c_btn {
+    float: left;
+    padding: 14px 18px;
+}
+
+.contact_heading h4 {
+    font-size: 28px;
+}
+
+.meeting{
+	/* background: url('https://i.ibb.co/y8bSC9p/alireza-etemadi-422369-unsplash-2000x1328.jpg')no-repeat center center; */
+	background-size: cover;
+	height: 280px;
+	position: relative;
+	z-index: 1;
+}
+.meeting::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: #dddc;
+    z-index: -1;
+    top: 0;
+    left: 0;
+}
+.meeting h1 {
+    font-size: 50px;
+    width: 76%;
+    margin: 38px auto;
+}
+
+/* footer_area css */
+
+.footer_area{
+	background: #F5F5F5;
+}
+
+/* template css */
+.site_template{
+	background: #F9F9F9;
+}
+.site_template img {
+    height: 225px;
+    width: 220px;
+}
+.p-1 {
+    width: 220px;
+    margin: 10px!important;
+}
+.d-flex.flex-row.flex-wrap.m-auto {
+    padding: 0px 73px;
+}
+.d-flex.flex-row.flex-wrap.m-auto p {
+    font-weight: bold;
+    color: #716d6d;
+    padding: 10px;
+    line-height: 18px;
+}
+
