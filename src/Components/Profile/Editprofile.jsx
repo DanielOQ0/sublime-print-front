@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Toaster, toast } from 'react-hot-toast'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { current } from '@reduxjs/toolkit'
 
 const { captureUser } = getUser
 
