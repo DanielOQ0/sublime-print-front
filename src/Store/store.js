@@ -5,6 +5,7 @@ import priceReducer from './ChangePrice/reducer'
 import captureUser from './Users/reducer'
 import userReducer from './CaptureUser/reducer'
 import checkoutMP from "./CheckoutMP/reducer"
+import getCategoriesReducer from './GetCategories/reducer'
 
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
     users: captureUser,
     mercadopago: checkoutMP,
     user: userReducer,
-   // product:productReducer
+    categories: getCategoriesReducer
+
   },
 });

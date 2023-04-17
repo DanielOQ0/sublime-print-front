@@ -59,13 +59,16 @@ export default function Profile() {
                             <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
                             {user.email}
                             </div>
-                            {/* <div className="mb-2 text-blueGray-600 mt-10">
-                            <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>{user.name}
-                            </div> */}
-                            {/* <div className="mb-2 text-blueGray-600">
-                            <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>{user.name}
-                            </div> */}
                         </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section className="relative py-60 bg-blueGray-200">
+                <div className="container mx-auto px-4">
+                    <div className="relativeflex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-64">
+                        <div className="px-6">
+                        fsdfsdfs
                         </div>
                     </div>
                 </div>

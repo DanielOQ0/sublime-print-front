@@ -51,7 +51,10 @@ export default function Muestras() {
 
             <div className="p-1">
               <img src="https://http2.mlstatic.com/D_NQ_NP_2X_940419-MLA51151515138_082022-F.webp" alt=""/>
-            </div>    
+            </div>  
+            <div className="p-1">
+              <img src="https://d22fxaf9t8d39k.cloudfront.net/ce37e1e170f1f5e1f0226e8b19c80dfde93214be03176580f22b85259324fcfb82601.jpeg" alt=""/>
+            </div>  
 
         </div>
       </div>
