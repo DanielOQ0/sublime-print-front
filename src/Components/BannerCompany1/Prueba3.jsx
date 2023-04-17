@@ -2,13 +2,13 @@ import React from 'react'
 import './prueba3.css'
 //import logo from '../../Media/logo.png'
 //<img className="logo"src={logo} alt="" />
-import image1 from '../../Media/istockphoto-1211786251-1024x1024.jpg'
+import image1 from '../../Media/compra-desde-casa.jpg'
 import image2 from '../../Media/Repartidor-con-cajas.jpg'
 
 export default function Prueba3() {
   return (
 
-    <div>
+  <div className='company-g'>
 
 
     <div class="banner text-center">
@@ -16,14 +16,14 @@ export default function Prueba3() {
         <div class="row">
           <div class="banner_content">
             <h2>Sublime Prints</h2>
-            <p>Desde su lanzamiento hace más casi 10 años, SUBLIME PRINTS se propuso romper fronteras, achicar distancias y unir a todo el país.
-              Cuando comenzamos con nuestra marca nos preguntamos que buscaba la gente. Con el correr del tiempo nos dimos cuenta que la gente busca lo mismo que nosotros:
-              Disponer de prendas, objetos y accesorios únicos, personalizados, ya sea para uso propio o para regalar a sus seres más queridos, es por eso que brindamos la posibilidad de materializar las ideas.
-              Queremos que nuestros clientes se sientan únicos, por lo que temporada tras temporada intentamos generar nuevos diseños y por sobre todas las cosas buena calidad. 
-              Buscamos clientes a largo plazo. La gente que compra en SUBLIME PRINTS sabe que no apuntamos a fabricar productos que duren días o semanas, sino que apuntamos a mercadería que dure años. Si el cliente vuelve a comprar tiene que ser porque sacamos un diseño aún mejor que el que ya nos compró. Es por eso que también apuntamos a todo tipo de contextos.
-              Gracias a nuestros productos de calidad, precios y trato personalizado, Sublime Prints comenzó el 2023 en más de 30 ciudades a lo largo del (PAIS XX?) gracias una lista de clientes que nos retribuyen con fidelidad y confianza.
-              Vos estas a tiempo de adquirir nuestros productos  o de venderlo en tu local y llevarlo a tu barrio, ciudad o provincia.
-              Podes conocernos a través de Whatsapp o conocer nuestra casa: av. Siempre viva jeje 123.
+            <p>Since its launch almost 10 years ago, SUBLIME PRINTS has set out to break borders, narrow distances and unite the entire country.
+When we started our brand, we asked ourselves what people were looking for. Over time we realized that people are looking for the same thing as us:
+Having unique, personalized garments, objects and accessories, either for your own use or to give to your loved ones, that is why we offer the possibility of materializing ideas.
+We want our customers to feel unique, so season after season we try to generate new designs and above all good quality.
+We are looking for long-term clients. People who shop at SUBLIME PRINTS know that we don't aim to make products that last days or weeks, but rather merchandise that lasts for years. If the customer buys again, it has to be because we produced an even better design than the one they already bought from us. That's why we also target all kinds of contexts.
+Thanks to our quality products, prices and personalized service, Sublime Prints began 2023 in more than 30 cities throughout the country thanks to a list of clients who reward us with loyalty and trust.
+You are in time to purchase our products or sell it in your local and take it to your neighborhood, city or province.
+You can meet us through Whatsapp or visit our headquarters: Bv. The Germans 3639.
             </p>
           </div>
         </div>
@@ -37,9 +37,11 @@ export default function Prueba3() {
             <img src={image1} alt=""/>
           </div>
           <div class="col-lg-6 align-self-center">
-            <h4>DESDE CASA ES MAS FACIL</h4>
+            <h4>FROM HOME IS EASIER</h4>
             <p>
-              En Sublime Prints te dejamos administrar los tiempos. Desde el diseño, pasando por la carga de tallas hasta los pagos; Puedes hacer TODO desde tu casa y queda registrado en el sistema. Y para fechas clave, no te preocupes. Te enviamos emails, sms y alertas para que no te olvides de nada ;)</p>
+            At Sublime Prints we let you manage the times. From the design, through the loading of sizes to the payments;
+            You can do EVERYTHING from your home and it is registered in the system. And for key dates, don't worry.
+            We send you emails, sms and alerts so you don't forget anything ;)</p>
           </div>
         </div>
       </div>
@@ -49,89 +51,16 @@ export default function Prueba3() {
       <div class="container">
         <div class="row">
           <div class="col-lg-6 align-self-center">
-            <h4>ENVÍO Y DEVOLUCIÓN GRATIS</h4>
-            <p>Somos una empresa 100% online que confía sus productos a DHL Mail. Clientes de toda Latinoamérica reciben nuestros productos en sus hogares. El envío es gratuito para todos nuestros clientes, aunque también pueden recogerlo en nuestras oficinas. Pero eso no es todo: la empresa también ofrece devoluciones gratuitas.
+            <h4>FREE SHIPPING AND RETURNS</h4>
+            <p>We are a 100% online company that entrusts its products to DHL Mail.
+                Customers from all over Latin America receive our products in their homes.
+                Shipping is free for all our customers, although they can also pick it up at our offices.
+                But that's not all: the company also offers free returns.
             </p>
           </div>
           <div class="col-lg-6">
             <img src={image2} alt=""/>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="site_template">
-      <div class="container text-center">
-
-          <div class="site_template_heading p-5">
-            <h3>Algunos de nuestros trabajos</h3>
-          </div>
-        <div class="d-flex flex-row flex-wrap m-auto">
-
-            <div class="p-1 ">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/mousepad.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/outfitpack.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/Backpack.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1 text-center">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/mug.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/3cap.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/cap.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/t-shirtWhite.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/3mug.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/t-shirt.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/keychain.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/WaterBottle.jpg" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/foto de prueba" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>    
-
-            <div class="p-1">
-              <img src="https://sublimeprint.nyc3.digitaloceanspaces.com/foto de prueba" alt=""/>
-              <p>ejemplo ejemplo ejemplo</p>
-            </div>     
         </div>
       </div>
     </div>

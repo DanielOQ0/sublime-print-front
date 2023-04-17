@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './stock.css'
 import { Link as Anchor } from "react-router-dom";
+import Swal from 'sweetalert2'
 
 export default function Stock() {
 	let token = localStorage.getItem("token")
@@ -17,14 +18,26 @@ export default function Stock() {
             });
     }, []); 
 
-    const handleDelete = (id) => {
-        axios.delete(`http://localhost:8080/api/products/${id}`, headers)
+	const handleDelete = (id) => {
+		try{
+			axios.delete(`http://localhost:8080/api/products/${id}`, headers)
             .then(res => {
                 setProducts(products.filter(product => product._id !== id));
             })
-            .catch(error => {
-                console.log(error);
-            });
+			Swal.fire({
+                icon: 'success',
+                title: 'Ok!',
+                text: 'Deleted!'
+            })
+
+		
+		}catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'not updated',
+            })
+		}	
     };
 
     const handleEdit = (event, id) => {
@@ -34,9 +47,11 @@ export default function Stock() {
         setEdit(newEdit);
     };
 
-    const handleUpdate = (id) => {
+
+	const handleUpdate = (id) => {
         const product = edit[id];
-        axios.put(`http://localhost:8080/api/products/${id}`, product, headers)
+		try{
+			axios.put(`http://localhost:8080/api/products/${id}`, product, headers)
             .then(res => {
                 const updatedProduct = res.data.product;
                 setProducts(products.map(product => {
@@ -49,10 +64,21 @@ export default function Stock() {
                 delete newEdit[id];
                 setEdit(newEdit);
             })
-            .catch(error => {
-                console.log(error);
-            });
+			Swal.fire({
+                icon: 'success',
+                title: 'Ok!',
+                text: 'Up date!'
+            })
+
+		} catch (error) {
+            console.log(error)
+            Swal.fire({
+                icon: 'error',
+                title: 'not updated',
+            })
+		}	
     };
+	
 
   return (
     <div>
