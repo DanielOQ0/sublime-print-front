@@ -20,7 +20,7 @@ function Cart({cla}) {
     const [isLoading, setIsLoading] = useState(false);
     let dispatch = useDispatch();
     products = useSelector(store=>store.cart.cart)
-    console.log(products)
+    // console.log(products)
     let summary= useSelector(store=>store.price)
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
@@ -32,7 +32,7 @@ function Cart({cla}) {
     let productsNames = products.map((e) => {
         return e.product_id.name
     })
-    console.log(productsNames)
+    // console.log(productsNames)
     const payments = 
         {
             id : productsIds.join(),
