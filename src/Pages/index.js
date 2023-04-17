@@ -15,16 +15,11 @@ import ProfileEdit from "./Profile/ProfileEdit";
 import Design from "./Design/Design";
 import AddressForm from "../Components/AddressForm/AddressForm";
 import NewProductForm from "../Components/NewProductForm/NewProductForm";
-import AdminPanel from "./AdminPanel/AdminPanel";
-
-
 
 export const router = createBrowserRouter([
   {
     path: "/admin",element: <AdminLayout />,
     children: [
-      {path: "/admin/panel/stock",element: <AdminPanel />,},
-     /*  {path: "/admin/panel/new",element: <p>new product</p>,}, */
     ],
   },
   {
