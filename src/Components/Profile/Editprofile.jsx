@@ -62,6 +62,12 @@ return (
                     <div className="input-container">
                         <input className="input-style" type="text"  defaultValue={user.name}  ref={name}/>
                     </div>
+                    {/* <div className="input-container">
+                        <input className="input-style" type="text" name="lastname" placeholder="Last name"/>
+                    </div> */}
+                    {/* <div className="input-container">
+                        <input className="input-style" type="number" name="dni" placeholder="DNI"/>
+                    </div> */}
                 </div>
             </div>
             <div className="button-container">
