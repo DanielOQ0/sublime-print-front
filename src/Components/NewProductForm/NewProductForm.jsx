@@ -4,6 +4,8 @@ import get_Categories from '../../Store/GetCategories/actions'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { Toaster, toast } from 'react-hot-toast'
+import SelectSizes from '../SelectSizes/SelectSizes'
+import SelectColors from '../SelectColors/SelectColors'
 
 const { getCategories} = get_Categories
 
@@ -12,12 +14,15 @@ export default function NewProductForm() {
     let dispatch = useDispatch()
     let categories = useSelector(store => store.categories.categories)
     let [ id, setId ] = useState('')
+    let [sizes, setSizes ] = useState()
+    let [colors, setColors ] = useState()
     let file = useRef()
     let name = useRef()
     let price = useRef()
     let stock = useRef()
     let imageName = useRef()
     let description = useRef()
+
 
     let url = 'http://localhost:8080/api/products/'
     let token = localStorage.getItem('token')
@@ -37,14 +42,16 @@ export default function NewProductForm() {
 
     const handleSubmit = async (e) => {
             e.preventDefault()
-            const data = new FormData()
-                data.append('file', file.current.files[0])
-                data.append('name', name.current.value)
-                data.append('price', price.current.value)
-                data.append('stock', stock.current.value)
-                data.append('key', imageName.current.value)
-                data.append('description', description.current.value)
 
+            const data = new FormData()
+            data.append('name', name.current.value)
+            // data.append('sizes',sizes)
+            // data.append('colors',colors)
+            data.append('price', price.current.value)
+            data.append('stock', stock.current.value)
+            data.append('file', file.current.files[0])
+            data.append('key', imageName.current.value)
+            data.append('description', description.current.value)
             try {
                 await axios.post(url+id, data, headers)
                 toast.success('New Product Successfully Created')
@@ -62,7 +69,7 @@ export default function NewProductForm() {
         <div className='from-container'>
             <form onSubmit={handleSubmit}>
                 <div className="border-b border-gray-900/10 pb-12 bg-blueGray-200 bg-white shadow-xl rounded-lg">
-                    <h1 className="text-base font-semibold leading-7 text-gray-900">NEW PRODUCT</h1>
+                    <h1 className="h1-newProduct text-base font-semibold leading-7 text-gray-900">NEW PRODUCT</h1>
 
                     <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 
@@ -81,7 +88,7 @@ export default function NewProductForm() {
                             CATEGORY
                         <div className="mt-2">
                             <select
-                            onChange={idCategory}
+                            onChange={idCategory} 
                             className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                             >
                             <option value=''>CHOSSE A CATEGORY</option>
@@ -98,27 +105,19 @@ export default function NewProductForm() {
 
                         <div className="sm:col-span-3">
                             SIZES
-                        <div className="mt-2">
-                            <select
-                            className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                            >
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                            </select>
-                        </div>
+                            <div className="mt-2">
+                            <SelectSizes
+                            setSizes={setSizes}
+                            />
+                            </div>
                         </div>
 
                         <div className="sm:col-span-3">
                             COLORS
                         <div className="mt-2">
-                            <select
-                            className="block w-full p-2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                            >
-                            <option>United States</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                            </select>
+                            <SelectColors
+                            setColors={setColors}
+                            />
                         </div>
                         </div>
 
@@ -177,8 +176,7 @@ export default function NewProductForm() {
                         </div>
 
                         <div className='boton-acciones col-span-full'>
-                        <button className='border-gray-900/10 bg-blueGray-200 bg-white shadow-xl rounded-lg'> SAVE</button>
-                        {/* <button className='border-gray-900/10 bg-blueGray-200 bg-white shadow-xl rounded-lg'> CANCEL</button> */}
+                        <button className='boton-save-newProduct border-gray-900/10 bg-blueGray-200 bg-white shadow-xl rounded-lg'> SAVE</button>
                         </div>
 
                     </div>
