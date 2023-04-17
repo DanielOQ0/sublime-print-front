@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import './Design.css'
 import { Disclosure } from '@headlessui/react'
-import { ArrowUpTrayIcon, MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { ArrowUpTrayIcon, Bars3BottomLeftIcon, Bars3Icon, Bars4Icon, MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { motion } from 'framer-motion';
 import { Layer, Stage } from 'react-konva';
 import { useState } from 'react';
@@ -59,16 +59,6 @@ let initialSectionImages = [
 const initialImages = [
 ];
 const initialTexts = [
-  {
-    x: 10,
-    y: 10,
-    width: 150,
-    id: 'text',
-    fontSize : 20,
-    align : 'start',
-    text : "Draggable Text asdasd as das fa fsa aff ",
-    fill : '#c3eb34',
-  },
 ];
 
 export default function Design() {
@@ -78,6 +68,21 @@ export default function Design() {
   const [section, setSection] = useState(initialSection);
   const [sectionImages, setSectionImages] = useState(initialSectionImages);
   const [selectedId, selectShape] = useState();
+  const [selectedText, setSelectedText] = useState('');
+  const [selectedTextAlign, setSelectedTextAlign] = useState({
+    start:false,
+    center:true,
+    justify:false
+  })
+  const [selectedTextColor, setSelectedTextColor] = useState('#000000')
+  const [selectedTextFont, setSelectedTextFont] = useState('Courier New')
+  const [textFontOptions, setTextFontOptionst] = useState([
+    {font: "Courier New" , selected:true},
+    {font: "Franklin Gothic Medium" , selected:false},
+    {font: "Times New Roman" , selected:false},
+    {font: "Gill Sans" , selected:false}
+  ])
+
   const stageRef = useRef()
   let borderStage = selectedId? '1px solid grey':'none'
 
@@ -151,16 +156,20 @@ export default function Design() {
   }
   function handleAddImages(){
     let imgSelected = sectionImages.filter((img)=>img.checked)[0]
-    console.log(imgSelected);
+    let repeatValue
     if(imgSelected){
       let aux = AddImagesCanva.slice()
+      if(aux.filter((img)=>img.id.includes(imgSelected.value)).length!=0){
+        let auxValue = aux.filter((img)=>img.id.includes(imgSelected.value)).length
+        repeatValue = imgSelected.value +auxValue
+      }
       aux.push(
         {
           x: 10,
           y: 10,
           width: 100,
           height: 100,
-          id: imgSelected.value,
+          id: repeatValue?repeatValue:imgSelected.value,
           url: imgSelected.image
         }
       )
@@ -176,7 +185,53 @@ export default function Design() {
       setAddImagesCanva(filterAux)
     }
     if(selectedId.startsWith('t')){
-      
+      let aux = AddTextsCanva.slice()
+      let filterAux = aux.filter((img)=>img.id!==selectedId)
+      setAddTextsCanva(filterAux)
+    }
+  }
+  function handleChangeText(e){
+    setSelectedText(e.target.value)
+  }
+  function handleTextAlign(e){
+    let aux = JSON.parse(JSON.stringify(selectedTextAlign))
+    aux.start = false
+    aux.center = false
+    aux.justify = false
+    aux[e.target.value] = true
+    setSelectedTextAlign(aux)
+  }
+  function handleChangeTextColor(e){
+    setSelectedTextColor(e.target.value)
+  }
+  function handleChangeTextFont(e){
+    setSelectedTextFont(e.target.value)
+    let aux = textFontOptions.slice()
+    aux.forEach((option)=>{
+      if(option.font===e.target.value){
+        option.selected=true
+      }else{
+        option.selected=false
+      }
+    })
+  }
+  function handleAddText(){
+    if(selectedText!=''){
+      let aux = AddTextsCanva.slice()
+      aux.push(
+        {
+          x: 10,
+          y: 10,
+          id: `t${AddTextsCanva.length}`,
+          align : selectedTextAlign,
+          text : selectedText,
+          fill : selectedTextColor,
+          fontFamily : selectedTextFont,
+        }
+      )
+      setAddTextsCanva(aux)
+    }else{
+      toast.error('Text is Empty')
     }
   }
    
@@ -238,7 +293,9 @@ export default function Design() {
         <button className='w-10 h-10 bh-white-200 canva-deselect' type='button' onClick={(e)=>{
           selectShape(null)
           handleExport(e)}}/>
+        {/* contenedor herramientas de edicion */}
         <div className='container-properties'>
+          {/* Seleccion colores  */}
           <div className='canva-deselect'>
             {section.map((section) => (
               <Disclosure as="div" key={section.id} className="border-b border-gray-200 py-6 canva-deselect">
@@ -288,13 +345,14 @@ export default function Design() {
               </Disclosure>
             ))}
           </div>
+          {/* Seleccion Imagenes */}
           <div className='canva-deselect'>
               <Disclosure as="div" className="border-b border-gray-200 py-6 canva-deselect">
                 {({ open }) => (
                   <>
                     <h3 className="-my-3 flow-root">
                       <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500 canva-deselect">
-                        <span className="font-medium text-gray-900 canva-deselect">Add images</span>
+                        <span className="font-medium text-gray-900 canva-deselect">Add Images</span>
                         <span className="ml-6 flex items-center canva-deselect">
                           {open ? (
                             <MinusIcon className="h-5 w-5 canva-deselect" aria-hidden="true" />
@@ -334,8 +392,65 @@ export default function Design() {
                         <label htmlFor="input-file-canva-image"><ArrowUpTrayIcon className='h-10 w-10 hover:text-indigo-600 cursor-pointer'/></label>
                         <input type="file" id='input-file-canva-image' onChange={handleUploadImage} accept="image/*" className='hidden' />
                         <button onClick={handleAddImages} type='button' className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
-                          Add to design
+                          Add Image
                         </button>
+                      </div>
+                    </Disclosure.Panel>
+                  </>
+                )}
+              </Disclosure>
+          </div>
+          {/* Seleccion textos */}
+          <div className='canva-deselect'>
+              <Disclosure as="div" className="border-b border-gray-200 py-6 canva-deselect">
+                {({ open }) => (
+                  <>
+                    <h3 className="-my-3 flow-root">
+                      <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500 canva-deselect">
+                        <span className="font-medium text-gray-900 canva-deselect">Add Texts</span>
+                        <span className="ml-6 flex items-center canva-deselect">
+                          {open ? (
+                            <MinusIcon className="h-5 w-5 canva-deselect" aria-hidden="true" />
+                          ) : (
+                            <PlusIcon className="h-5 w-5 canva-deselect" aria-hidden="true" />
+                          )}
+                        </span>
+                      </Disclosure.Button>
+                    </h3>
+                    <Disclosure.Panel className="pt-6 canva-deselect">
+                      <div className='w-full h-10 flex flex-raw flex-wrap justify-around items-center gap-5 hover:text-'>
+                        <input onChange={handleChangeText} defaultValue={selectedText} style={{color : `${selectedTextColor}`, fontFamily : `${selectedTextFont}`}} type="text" sty className='py-3 px-4 w-40 block border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-500 dark:border-gray-700 ' />
+                        <button onClick={handleAddText} type='button' className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
+                          Add Text
+                        </button>
+                      </div>
+                      <div className='flex flex-raw items-center justify-around py-3'>
+                        <div className='flex flex-raw gap-1 items-center '>
+                          <div className={`h-7 w-7 flex items-center justify-center ${selectedTextAlign.start?"border-solid border-2 border-indigo-300":""}`}>
+                            <label htmlFor="start-align"><Bars3BottomLeftIcon className='w-6 h-6'/></label>
+                            <input onChange={handleTextAlign} type="radio" id='start-align' name='text-align-radio' className='hidden' defaultValue='start'/>
+                          </div>
+                          <div className={`h-7 w-7 flex items-center justify-center ${selectedTextAlign.center?"border-solid border-2 border-indigo-300":""}`}>
+                            <label htmlFor="center-align"><Bars3Icon className='w-6 h-6'/></label>
+                            <input onChange={handleTextAlign} type="radio" id='center-align' name='text-align-radio' className='hidden' defaultValue='center'/>
+                          </div>
+                          <div className={`h-7 w-7 flex items-center justify-center ${selectedTextAlign.justify?"border-solid border-2 border-indigo-300":""}`}>
+                            <label htmlFor="justify-align"><Bars4Icon className='w-6 h-6'/></label>
+                            <input onChange={handleTextAlign} type="radio" id='justify-align' name='text-align-radio' className='hidden' defaultValue='justify'/>
+                          </div>
+                        </div>
+                        <div className='flex items-center justify-center'>
+                            <input type="color" defaultValue={selectedTextColor} onChange={handleChangeTextColor} />
+                        </div>
+                        <div>
+                          <select onChange={handleChangeTextFont} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                            {
+                              textFontOptions.map((option,index)=>{
+                                return <option key={index} selected={option.selected} value={option.font}>{option.font}</option>
+                              })
+                            }
+                          </select>
+                        </div>
                       </div>
                     </Disclosure.Panel>
                   </>

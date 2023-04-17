@@ -19,6 +19,7 @@ export default function CanvaText({ shapeProps, isSelected, onSelect, onChange }
         onClick={onSelect}
         onTap={onSelect}
         ref={shapeRef}
+        fontSize={20}
         {...shapeProps}
         draggable
         onDragEnd={(e) => {
