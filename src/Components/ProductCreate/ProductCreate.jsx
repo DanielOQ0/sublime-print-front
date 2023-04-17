@@ -46,7 +46,7 @@ export default function ProductCreate() {
       <input ref={description} name="description" type="text" placeholder="description" required/>
       <input ref={price} name="price" type="text" placeholder="price" required />
       <input ref={stock} name="stock" type="text" placeholder="stock" required/>
-      <input ref={category} name="category" type="select" placeholder="category" required/>
+      {/* <input ref={category} name="category" type="select" placeholder="category" required/> */}
       {/* <input ref={image} name="iamge" type="file" placeholder="image" required/> */}
       <input type="submit" value="Send" />
     </form>

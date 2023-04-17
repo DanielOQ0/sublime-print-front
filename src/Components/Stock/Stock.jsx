@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './stock3.css'
+import './stock.css'
+import { Link as Anchor } from "react-router-dom";
 
-export default function Stock3() {
+export default function Stock() {
 	let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
     const [products, setProducts] = useState([]);
@@ -12,7 +13,6 @@ export default function Stock3() {
     useEffect(() => { 
         axios.get('http://localhost:8080/api/products', headers)
             .then(res => { 
-                console.log(res.data.products)
                 setProducts(res.data.products);
             });
     }, []); 
@@ -57,85 +57,67 @@ export default function Stock3() {
   return (
     <div>
        
-		<nav class="navbar navbar-toggleable navbar-inverse fixed-top bg-inverse">
-			<h2 class="navbar-brand"> ADMIN PRODUCTS</h2>
+		<nav className="navbar navbar-toggleable navbar-inverse fixed-top bg-inverse">
+			<h2 className="navbar-brand"> ADMIN PRODUCTS</h2>
 		</nav>
 	
-		<main class="container-fluid">
-			<article class="row">
+		<main className="container-fluid">
+			<article className="row">
 			 <aside>
-					<nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded navbar-inverse sidebar">
-							<ul class="nav nav-pills flex-column">
-								<li class="nav-item">
-								<a class="nav-link " href="./">DASHBOARD</a>
-								</li>	
-								<li class="nav-item">
-								<a class="nav-link active" href="posts.php">PRODUCTS</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link " href="media.php">USERS</a>
-								</li>
-								{/* <li class="nav-item">
-								<a class="nav-link active" href="posts.php">PRODUCTS</a>
-								</li>
-								<li class="nav-item">
-									<a class="nav-link " href="media.php">USERS</a>
-								</li> */}	
-							</ul>					
+					<nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded navbar-inverse sidebar">
+						<ul className="nav nav-pills flex-column">
+						    <li className="nav-item">
+							<p className="nav-link ">DASHBOARD</p>
+							</li>	
+							<li className="nav-item">
+							<Anchor to="/#" className="nav-link active">PRODUCTS</Anchor>
+							</li>
+							<li className="nav-item">
+							<Anchor to="/#" className="nav-link ">USERS</Anchor>
+							</li>
+						</ul>					
 					</nav>
 				</aside>
-				<section class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
-					<article class="row">
-						<header class="col-xl-10 col-md-10 offset-md-1 col-sm-12">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="./">Dashboard</a></li>
-								<li class="breadcrumb-item active">Posts</li>
+				<section className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+					<article className="row">
+						<header className="col-xl-10 col-md-10 offset-md-1 col-sm-12 xx">
+							<ol className="breadcrumb xx">
+								<li className="breadcrumb-item"><p></p></li>
+								<li className="breadcrumb-item active"></li>
 							</ol>
 						</header>
-						<section class="col-xl-10 col-md-10 offset-md-1 col-sm-12 mb-3">
+						<section className="col-xl-10 col-md-10 offset-md-1 col-sm-12 mb-3">
 							<div>
-								{/* <a class="btn btn-xs btn-info">Add New</a> */}
 								<hr />
-								<span class="float-right">
-									<form class="form-inline">
-										<div class="input-group input-group-sm">
-											<input type="search" class="form-control" name="q" placeholder="Search Posts"/>
-											<button class="input-group-addon" aria-label="Search Posts">
-												<i class="fa fa-search" aria-hidden="true"></i>
+								<span className="float-right">
+									<form className="form-inline">
+										<div className="input-group input-group-sm">
+											<input type="search" className="form-control" name="q" placeholder="Search Products"/>
+											<button className="input-group-addon" aria-label="Search Posts">
+												<i className="fa fa-search" aria-hidden="true"></i>
 											</button>
 										</div>
 									</form>
 								</span>
-								 <nav>
-				
-									<a class="btn btn-xs btn-info">Add New</a>
-									<a class="btn btn-xs btn-info">Add New</a>
-									{/* <a class="text-muted" href="?published=true">Published (4)</a> |
-									<a class="text-muted" href="?published=false">Draft (3)</a> */}
-								</nav>
+								<Anchor to="/#" className="btn btn-xs btn-info btn-add">Add New</Anchor>
 							</div>
 							<br />
 							<div >
-								<table class="table">{/* table table-striped table-sm comments */}
+								<table className="table">
 									<thead>
 										<tr>
-											<th></th>
-											<th>Image</th>
-											<th>Name</th>
-											<th>Price</th>
-											<th>stock</th>
-											<th>ID</th>
+											<th className='table-text'></th>
+											<th className='table-text'>Image</th>
+											<th className='table-text'>Name</th>
+											<th className='table-text'>Price</th>
+											<th className='table-text'>Stock</th>
+											<th className='table-text'></th>
 										</tr>
 									</thead>
 									<tbody>
 									{products.map((product, index) => (
-										<tr key={index}> {/* DATOS DINAMICOS */}
+										<tr key={index}>
 											<td>
-											{/*  <div class="form-check">
-												<label class="form-check-label">
-													<input class="form-check-input" type="checkbox" name="check_list[]" value="1"/>
-												</label>
-											 </div> */}
 											</td>
 											<td className='data-product'>
 												<img src={product.image} alt={product.name} className='image'/>
@@ -149,17 +131,11 @@ export default function Stock3() {
 											<td className='data-product'>
 												<input type="number" name="stock" value={edit[product._id]?.stock || product.stock} onChange={(event) => handleEdit(event, product._id)} className='data-product'/>
 											</td>
-											{/* <td>7</td>
-											<td>2017-02-23</td> */}
-											<td class="td-comments text-right" className='data-product'>
-											 {/*  {product._id} */}
-												{/* <button class="btn btn-xs btn-simple btn-outline-warning">
-													BOTON 1
-												</button> */}
-												<button onClick={() => handleUpdate(product._id)}  type="button"  class="btn btn-xs btn-simple btn-outline-success">
+											<td className="td-comments text-right data-product" >
+												<button onClick={() => handleUpdate(product._id)}  type="button"  className="btn btn-xs btn-simple btn-outline-success btn-update">
 													UpDate
 												</button>
-												<button onClick={() => handleDelete(product._id)}  type="button" class="btn btn-xs btn-simple btn-outline-danger">
+												<button onClick={() => handleDelete(product._id)}  type="button" className="btn btn-xs btn-simple btn-outline-danger btn-delete">
 													DELETE
 												</button>
 											</td>
@@ -168,14 +144,11 @@ export default function Stock3() {
 									</tbody>
 								</table>
 							</div>
-
 						</section>
 					</article>
 				</section>
 			</article>
 		</main>
-	
-
     </div>
   )
 }
