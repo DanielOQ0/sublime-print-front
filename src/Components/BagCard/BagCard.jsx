@@ -1,4 +1,5 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
+import './BagCard.css'
 import axios from 'axios';
 import React from 'react'
 import { toast } from 'react-hot-toast';
@@ -72,7 +73,7 @@ export default function BagCard({product}) {
   return (
     <div key={product._id}>
         <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
-            <div className="w-1/4" style={{backgroundImage : `url(${bagColor})`, backgroundSize:"cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
+            <div className="w-1/4 bag-div-card" style={{backgroundImage : `url(${bagColor})`, backgroundSize:"cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
                 <img src={product.product_id.image} className={`object-center object-cover ${classCustom}`} />
             </div>
             <div className="md:pl-3 md:w-3/4">
