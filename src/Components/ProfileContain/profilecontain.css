@@ -1,0 +1,30 @@
+.container-profile {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fotoPerfil {
+    width: 9rem;
+    height: 9rem;
+    border: none;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.formProfile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.formProfile input.name {
+    font-size: x-large;
+    font-weight:500;
+}
+
+.formProfile input.file {
+    font-size: smaller;
+}
