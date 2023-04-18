@@ -24,8 +24,8 @@ export default function AddressContain() {
             <h1> ADDRESSES </h1>
             {
                 address ? (
-                    address.map((add) =>(
-                        <AddressCard address={add.address} location={`${add.state} - ${add.city}`} phone={add.contact_phone}  />
+                    address.map((add,i) =>(
+                        <AddressCard key={i} address={add.address} location={`${add.state} - ${add.city}`} phone={add.contact_phone}  />
                     ))
                 ) : null
             }

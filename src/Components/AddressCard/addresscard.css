@@ -17,6 +17,9 @@
 .AddressCard-text {
     width: 90%;
     font-size: small;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 p.direccion {
