@@ -1,7 +1,6 @@
 import React from 'react'
 import './prueba3.css'
-import image1 from '../../Media/compra-desde-casa.jpg'
-import image2 from '../../Media/Repartidor-con-cajas.jpg'
+
 
 export default function Prueba3() {
   return (
@@ -54,8 +53,3 @@ export default function Prueba3() {
     
   )
 }
-
-
-
-
-    
