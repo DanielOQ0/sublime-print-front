@@ -163,32 +163,11 @@
 	display: flex;
 	margin: 1rem;
     padding-top: 1.5rem;
-	/* border: 1px solid red; */
+	
 }
 
 
-.container-fluid{
-    /* border: 1px solid red; */
-}
 
-.row-stock{
-	/* border: 1px solid red; */
-}
-
-.sidebar-stock{
-	/* border: 1px solid red; */
-}
-
-.table{
-  
-	/* border: 3px solid blue; */
-}
-
-
-.table-text{
-	/* border: 1px solid grey;	
-    border: 1px solid red; */
-}
 
 .data-product2{
 	text-align: center;
