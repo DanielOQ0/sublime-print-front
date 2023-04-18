@@ -26,6 +26,7 @@ export const router = createBrowserRouter([
     children: [
       {path: "/admin/panel/stock",element: <AdminPanel />,},
      /*  {path: "/admin/panel/new",element: <p>new product</p>,}, */
+
     ],
   },
   {
