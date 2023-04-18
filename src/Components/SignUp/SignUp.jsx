@@ -40,11 +40,11 @@ export default function SignUp() {
     return (
     <div>
         <div className="bg-gray-300 min-h-screen flex flex-col">
-            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center w-full max-w-md justify-center px-2">
+            <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center w-50 max-w-md justify-center px-2">
                 <motion.div
                     initial={{y:200}}
                     animate={{y:0, duration:2}}
-                 className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
+                    className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Sign up</h1>
                     <form onSubmit={handleSubmit}>
                         <input 

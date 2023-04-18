@@ -1,27 +1,9 @@
-.probando{
-    color: red;
-}
 .profile-page{
+    min-height: 55rem;
+    /* border: 2px solid red; */
     padding-top: 3rem;
     background-color: #E4F1F5;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
-
-.image-profile img{
-    margin-top: 1rem;
-    width: 10rem;
-}
-
-
-.img-photo{
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-}
-
-/* 
-#7374FA
-#6686DE
-#7DBDF5
-#E4F1F5
-#00B2A5
-*/
