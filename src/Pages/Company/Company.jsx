@@ -1,6 +1,6 @@
 import React from 'react'
 import Prueba3 from '../../Components/BannerCompany1/Prueba3'
-
+import Prueba3 from '../../Components/BannerCompany1/Prueba3'
 
 export default function Company() {
   return (
