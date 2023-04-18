@@ -1,9 +1,10 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import './stock.css'
+import './stock2.css'
 import { Link as Anchor } from "react-router-dom";
 import Swal from 'sweetalert2'
+
 
 export default function Stock() {
 	let token = localStorage.getItem("token")
@@ -29,7 +30,6 @@ export default function Stock() {
                 title: 'Ok!',
                 text: 'Deleted!'
             })
-
 		
 		}catch (error) {
             console.log(error)
@@ -79,42 +79,24 @@ export default function Stock() {
 		}	
     };
 	
-
   return (
-    <div className='container-stock'>
+    <div class="body-stock">
+        <div class="page-stock">
+        <div class="sidebar">
+            <h2>ADMIN</h2>
+            <ul class="links">
+                
+            <li><p class="active"><Anchor to="/#">Products</Anchor></p></li>
+            <li><p><Anchor to="/#">Home</Anchor></p></li>
+            </ul>
+        </div>
+        <div class="content">
+            <div className='container-stock'>
        
-		<nav className="navbar navbar-toggleable navbar-inverse fixed-top bg-inverse">
-			<h2 className="navbar-brand"> ADMIN PRODUCTS</h2>
-			<ul className="nav nav-pills flex-column">
-				<li className="nav-item">
-					<p className="nav-link ">DASHBOARD</p>
-				</li>	
-				<li className="nav-item">
-					<Anchor to="/#" className="nav-link active">PRODUCTS</Anchor>
-				</li>
-				<li className="nav-item">
-					<Anchor to="/#" className="nav-link ">USERS</Anchor>
-				</li>
-			</ul>	
-		</nav>
+		
 	
 		<main className="container-fluid">
 			<article className="row-stock">
-			 <aside>
-					{/* <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded navbar-inverse sidebar-stock">
-						<ul className="nav nav-pills flex-column">
-						    <li className="nav-item">
-							<p className="nav-link ">DASHBOARD</p>
-							</li>	
-							<li className="nav-item">
-							<Anchor to="/#" className="nav-link active">PRODUCTS</Anchor>
-							</li>
-							<li className="nav-item">
-							<Anchor to="/#" className="nav-link ">USERS</Anchor>
-							</li>
-						</ul>					
-					</nav> */}
-				</aside>
 				<section className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 					<article className="row">
 						<header className="col-xl-10 col-md-10 offset-md-1 col-sm-12 xx">
@@ -123,26 +105,25 @@ export default function Stock() {
 								<li className="breadcrumb-item active"></li>
 							</ol>
 						</header>
+                       {/*  <Anchor to="/#" className="btn-new">Add New</Anchor> */}
 						<section className="col-xl-10 col-md-10 offset-md-1 col-sm-12 mb-3">
 							<div>
-								<hr />
+								{/* <hr /> */}
 								<span className="float-right">
+                                <Anchor to="/#" className="btn-new">Add New</Anchor>
 									<form className="form-inline">
 										<div className="input-group input-group-sm">
-											<input type="search" className="form-control" name="q" placeholder="Search Products"/>
-											<button className="input-group-addon" aria-label="Search Posts">
-												<i className="fa fa-search" aria-hidden="true"></i>
-											</button>
+	
 										</div>
 									</form>
 								</span>
-								<Anchor to="/#" className="btn btn-xs btn-info btn-add">Add New</Anchor>
 							</div>
+                            
 							<br />
 							<div >
 								<table className="table">
 									<thead>
-										<tr>
+										<tr className='table-head'>
 											<th className='table-text'></th>
 											<th className='table-text'>Image</th>
 											<th className='table-text'>Name</th>
@@ -156,8 +137,8 @@ export default function Stock() {
 										<tr key={index}>
 											<td>
 											</td>
-											<td className='data-product'>
-												<img src={product.image} alt={product.name} className='image'/>
+											<td className='data-product2'>
+												<img src={product.image} alt={product.name} className='image-stock'/>
 											</td>
 											<td className='data-product'>
 											<input type="text" name="name" value={edit[product._id]?.name || product.name} onChange={(event) => handleEdit(event, product._id)} className='data-product'/>
@@ -169,10 +150,10 @@ export default function Stock() {
 												<input type="number" name="stock" value={edit[product._id]?.stock || product.stock} onChange={(event) => handleEdit(event, product._id)} className='data-product'/>
 											</td>
 											<td className="td-comments text-right data-product" >
-												<button onClick={() => handleUpdate(product._id)}  type="button"  className="btn btn-xs btn-simple btn-outline-success btn-update">
+												<button onClick={() => handleUpdate(product._id)}  type="button"  className="btn-update">
 													UpDate
 												</button>
-												<button onClick={() => handleDelete(product._id)}  type="button" className="btn btn-xs btn-simple btn-outline-danger btn-delete">
+												<button onClick={() => handleDelete(product._id)}  type="button" className="btn-delete">
 													DELETE
 												</button>
 											</td>
@@ -186,6 +167,13 @@ export default function Stock() {
 				</section>
 			</article>
 		</main>
+    </div>
+         
+            
+        </div>
+       
+        </div>
+
     </div>
   )
 }

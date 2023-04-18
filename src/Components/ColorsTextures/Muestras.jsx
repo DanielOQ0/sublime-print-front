@@ -1,5 +1,5 @@
 import React from 'react'
-import './muestras.css'
+//import './muestras.css'
 
 export default function Muestras() {
   return (

@@ -1,6 +1,6 @@
-@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css';
+/* @import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'; */
 /* Orbitron Font */
-@import 'https://fonts.googleapis.com/css?family=Orbitron:700';
+/* @import 'https://fonts.googleapis.com/css?family=Orbitron:700'; */
 
 /* BUTTONS */
 
@@ -87,9 +87,52 @@
 }
 
 .btn-delete{
+	/* padding-right: 1rem; */
+	margin-left: 1rem;
 	border: 1px solid red;
 }
 
 .btn-update{
 	border: 1px solid green;
+}
+
+.container-stock{
+
+	display: flex;
+	margin: 1rem;
+	/* border: 1px solid red; */
+}
+
+
+.container-fluid{
+
+
+	/* border: 1px solid red; */
+}
+
+.row-stock{
+
+	/* border: 1px solid red; */
+}
+
+.sidebar-stock{
+
+	/* border: 1px solid red; */
+}
+
+.table{
+
+	border: 1px solid blue;
+}
+
+
+.table-text{
+
+
+	/* border: 1px solid blue; */	
+}
+
+.data-product{
+	text-align: center;
+	border: 1px solid blue;
 }
