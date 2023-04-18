@@ -1,0 +1,19 @@
+.from-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.border-b {
+    padding: 2rem;
+}
+
+.boton-acciones {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    gap: 8rem;
+}
+

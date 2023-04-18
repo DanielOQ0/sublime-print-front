@@ -1,13 +1,20 @@
 import React, { useRef } from 'react'
 import './Design.css'
 import { Disclosure } from '@headlessui/react'
-import { ArrowUpTrayIcon, Bars3BottomLeftIcon, Bars3Icon, Bars4Icon, MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
+import { ArrowDownTrayIcon, ArrowRightCircleIcon, ArrowUpTrayIcon, Bars3BottomLeftIcon, Bars3Icon, Bars4Icon, DocumentMinusIcon, MinusIcon, PlusIcon, TrashIcon } from '@heroicons/react/20/solid'
 import { motion } from 'framer-motion';
 import { Layer, Stage } from 'react-konva';
 import { useState } from 'react';
 import CanvaImage from '../../Components/CanvaImage/CanvaImage';
 import CanvaText from '../../Components/CanvaText/CanvaText';
 import { toast } from 'react-hot-toast';
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import LoadingSpinner from '../../Components/LoadingSpinner/LoadingSpinner';
+import priceActions from "../../Store/ChangePrice/actions"
+import { useDispatch } from 'react-redux';
+
+const { changePrice } = priceActions
 
 //framer motion
 const containerFast = {
@@ -63,6 +70,7 @@ const initialTexts = [
 
 export default function Design() {
 
+  const [isLoading, setIsLoading] = useState(false);
   const [AddImagesCanva, setAddImagesCanva] = useState(initialImages);
   const [AddTextsCanva, setAddTextsCanva] = useState(initialTexts);
   const [section, setSection] = useState(initialSection);
@@ -84,9 +92,10 @@ export default function Design() {
   ])
 
   const stageRef = useRef()
-  let borderStage = selectedId? '1px solid grey':'none'
-
-  console.log(selectedId);
+  const sizeRef = useRef()
+  const quantityRef = useRef()
+  const dispatch = useDispatch()
+  let borderStage = selectedId? '1px dashed blue':'none'
 
   function handleChange(e){
     section.forEach((sec,ii)=>{
@@ -106,8 +115,14 @@ export default function Design() {
     })
   }
   function handleExport(){
+    if(AddImagesCanva.length!=0||AddTextsCanva.length!=0){
     const uri = stageRef.current.toDataURL();
     downloadURI(uri,"Custom")
+  }else{
+    toast('Oops! create your design first!', {
+      icon: '👇🤩', duration: 2000,
+    });
+  }
   }
   function downloadURI(uri, name) {
     var link = document.createElement('a');
@@ -179,12 +194,17 @@ export default function Design() {
     }
   }
   function handleDeleteSelected(){
-    if(selectedId.startsWith('i')){
+    if(!selectedId){
+      toast('Select the element to delete!', {
+        icon:'⚠️', duration: 2000,
+      });
+    }
+    if(selectedId?.startsWith('i')){
       let aux = AddImagesCanva.slice()
       let filterAux = aux.filter((img)=>img.id!==selectedId)
       setAddImagesCanva(filterAux)
     }
-    if(selectedId.startsWith('t')){
+    if(selectedId?.startsWith('t')){
       let aux = AddTextsCanva.slice()
       let filterAux = aux.filter((img)=>img.id!==selectedId)
       setAddTextsCanva(filterAux)
@@ -233,6 +253,69 @@ export default function Design() {
     }else{
       toast.error('Text is Empty')
     }
+  }
+  function handleDeletAll(){
+    if(AddImagesCanva.length!=0||AddTextsCanva.length!=0){
+      Swal.fire({
+      title: 'Are you sure to clean desing?',
+      showDenyButton: true,
+      confirmButtonText: 'Clean',
+      denyButtonText: `Don't clean`,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setAddImagesCanva([])
+          setAddTextsCanva([])
+          toast('Successful cleaning!', {
+            icon:'🚮', duration: 2000,
+          });
+        } 
+      })
+    }else{
+      toast('Layout is empty!', {
+        icon:'🚨', duration: 2000,
+      });
+    }
+    
+  }
+  async function handleAddBag(){
+    setIsLoading(true)
+    let token = localStorage.getItem("token")
+    let headers = { headers: { Authorization: `Bearer ${token}` } };
+    if(AddImagesCanva.length!=0||AddTextsCanva.length!=0){
+      if(quantityRef.current===undefined||quantityRef.current===null){
+        toast.error('Select shirt features')
+        setIsLoading(false)
+      }else{
+        if(quantityRef.current.value!=undefined||quantityRef.current.value>0){
+          let url = 'http://localhost:8080/api/products/custom/643dcb32deaba3a1439bd83e'
+          let data = {
+            url: stageRef.current.toDataURL(),
+            price: 40,
+            stock: quantityRef.current.value,
+          }
+          try {
+            const res = await axios.post(url, data, headers);
+            let product_id = res.data.product._id
+            let url2 ='http://localhost:8080/api/cart/'+product_id
+            let body = {color:section[0].labelChecked, size:sizeRef.current.value, quantity: quantityRef.current.value}
+            const res2 = await axios.post(url2,body,headers)
+            toast.success('Product added to bag')
+            dispatch(changePrice())
+            setIsLoading(false)
+          } catch (error) {
+            console.log(error);
+            toast.error(error.response.data.message)
+            setIsLoading(false)
+          }
+        }
+      }
+    }else{
+      toast('Oops! create your design first!', {
+        icon: '👇🤩', duration: 2000,
+      });
+      setIsLoading(false)
+    }
+    
   }
    
   
@@ -288,12 +371,12 @@ export default function Design() {
           </Stage>
         </div>
       </section>
-      
+      {/* seccion herramientas */}
       <section className='container-tools-design canva-deselect'>
-        <button className='w-10 h-10 bh-white-200 canva-deselect' type='button' onClick={(e)=>{
-          selectShape(null)
-          handleExport(e)}}/>
         {/* contenedor herramientas de edicion */}
+        <span className='container-tools-design-top'>
+          <DocumentMinusIcon onClick={handleDeletAll} className='h-10 w-10 hover:text-red-600 cursor-pointer'/>
+        </span>
         <div className='container-properties'>
           {/* Seleccion colores  */}
           <div className='canva-deselect'>
@@ -302,7 +385,7 @@ export default function Design() {
                 {({ open }) => (
                   <>
                     <h3 className="-my-3 flow-root">
-                      <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500 canva-deselect">
+                      <Disclosure.Button className="flex w-full items-center justify-between text-sm text-gray-400 hover:text-gray-500 canva-deselect">
                         <span className="font-medium text-gray-900 canva-deselect">{section.name}{section.labelChecked}</span>
                         <span className="ml-6 flex items-center canva-deselect">
                           {open ? (
@@ -351,7 +434,7 @@ export default function Design() {
                 {({ open }) => (
                   <>
                     <h3 className="-my-3 flow-root">
-                      <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500 canva-deselect">
+                      <Disclosure.Button className="flex w-full items-center justify-between text-sm text-gray-400 hover:text-gray-500 canva-deselect">
                         <span className="font-medium text-gray-900 canva-deselect">Add Images</span>
                         <span className="ml-6 flex items-center canva-deselect">
                           {open ? (
@@ -388,7 +471,7 @@ export default function Design() {
                           </motion.div>
                         ))}
                       </motion.div>
-                      <div className='pt-5 w-full h-10 flex flex-raw flex-wrap justify-around items-center gap-5 hover:text-'>
+                      <div className='pt-2 w-full h-10 flex flex-raw flex-wrap justify-around items-center gap-5 hover:text-'>
                         <label htmlFor="input-file-canva-image"><ArrowUpTrayIcon className='h-10 w-10 hover:text-indigo-600 cursor-pointer'/></label>
                         <input type="file" id='input-file-canva-image' onChange={handleUploadImage} accept="image/*" className='hidden' />
                         <button onClick={handleAddImages} type='button' className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
@@ -406,7 +489,7 @@ export default function Design() {
                 {({ open }) => (
                   <>
                     <h3 className="-my-3 flow-root">
-                      <Disclosure.Button className="flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500 canva-deselect">
+                      <Disclosure.Button className="flex w-full items-center justify-between text-sm text-gray-400 hover:text-gray-500 canva-deselect">
                         <span className="font-medium text-gray-900 canva-deselect">Add Texts</span>
                         <span className="ml-6 flex items-center canva-deselect">
                           {open ? (
@@ -418,8 +501,8 @@ export default function Design() {
                       </Disclosure.Button>
                     </h3>
                     <Disclosure.Panel className="pt-6 canva-deselect">
-                      <div className='w-full h-10 flex flex-raw flex-wrap justify-around items-center gap-5 hover:text-'>
-                        <input onChange={handleChangeText} defaultValue={selectedText} style={{color : `${selectedTextColor}`, fontFamily : `${selectedTextFont}`}} type="text" sty className='py-3 px-4 w-40 block border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-500 dark:border-gray-700 ' />
+                      <div className='w-full flex flex-raw flex-wrap justify-around items-center gap-5 hover:text-'>
+                        <input onChange={handleChangeText} defaultValue={selectedText} style={{color : `${selectedTextColor}`, fontFamily : `${selectedTextFont}`}} type="text" sty className='py-3 px-4 w-40 block border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-500 dark:border-gray-700' />
                         <button onClick={handleAddText} type='button' className='bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded'>
                           Add Text
                         </button>
@@ -457,10 +540,63 @@ export default function Design() {
                 )}
               </Disclosure>
           </div>
+          {/* Shirt Features */}
+          <div className='canva-deselect'>
+              <Disclosure as="div" className="border-b border-gray-200 py-6 canva-deselect">
+                {({ open }) => (
+                  <>
+                    <h3 className="-my-3 flow-root">
+                      <Disclosure.Button className="flex w-full items-center justify-between text-sm text-gray-400 hover:text-gray-500 canva-deselect">
+                        <span className="font-medium text-gray-900 canva-deselect">Shirt Features</span>
+                        <span className="ml-6 flex items-center canva-deselect">
+                          {open ? (
+                            <MinusIcon className="h-5 w-5 canva-deselect" aria-hidden="true" />
+                          ) : (
+                            <PlusIcon className="h-5 w-5 canva-deselect" aria-hidden="true" />
+                          )}
+                        </span>
+                      </Disclosure.Button>
+                    </h3>
+                    <Disclosure.Panel className="pt-6 canva-deselect">
+                      <div className='flex flex-raw items-center justify-around py-3'>
+                        <div className='flex flex-col'>
+                          <p>Size</p>
+                          <select ref={sizeRef} className='w-20 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-400 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
+                              <option value="XS">XS</option>
+                              <option value="S">S</option>
+                              <option value="M">M</option>
+                              <option value="L">L</option>
+                              <option value="XL">XL</option>
+                              <option value="XXL">XXL</option>
+                              <option value="XXXL">XXXL</option>
+                          </select>
+                        </div>
+                        <div className='flex flex-col'>
+                          <p>Quantity to order</p>
+                          <input ref={quantityRef} type="number" defaultValue={0} min="0" pattern="^[0-9]+" max={10} className='py-3 px-4 w-40 block border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-400 dark:border-gray-700' />
+                        </div>
+                      </div>
+                    </Disclosure.Panel>
+                  </>
+                )}
+              </Disclosure>
+          </div>
         </div>
+        {/* herramientas del diseño */}
         <div className='container-tools-design-bottom'>
-          <span >
+          <span className='canva-deselect' >
+            <ArrowDownTrayIcon
+            className='h-10 w-10 hover:text-indigo-600 cursor-pointer'
+            onClick={(e)=>{
+              selectShape(null)
+              handleExport(e)}}/>
+          </span>
+          <span>
             <TrashIcon onClick={handleDeleteSelected} className='h-10 w-10 hover:text-red-600 cursor-pointer'/>
+          </span>
+          <span onClick={handleAddBag} className='flex items-center border w-50 text-xl hover:text-indigo-600 cursor-pointer'>
+            {isLoading? <LoadingSpinner size={"small"}/>: <p>Add to bag</p>}
+              <ArrowRightCircleIcon className='h-10 w-10'/>
           </span>
         </div>
       </section>

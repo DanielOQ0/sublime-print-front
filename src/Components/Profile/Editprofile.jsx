@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './editprofile.css'
 import getUser from '../../Store/CaptureUser/actions'
 import { useDispatch, useSelector } from 'react-redux'
@@ -17,26 +17,27 @@ export default function Editprofile() {
     let token = localStorage.getItem('token')
     let headers = { headers: { Authorization: `Bearer ${token}` } };
     let name = useRef()
-
+    let file = useRef()
+    
     useEffect(
         () => {
             dispatch(captureUser())
         },
         []
         )
-        
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        let data = {
-            name: name.current.value,
-        }
+
+        const handleSubmit = async (e) => {
+            e.preventDefault()
+            const data = new FormData()
+            data.append('file',file.current.files[0])
+            data.append('name',name.current.value)
         try {
             await axios.put(url,data,headers)
-            toast.success('User successfully updated')
+            toast.success('User successfully updated', { duration: 1500})
             dispatch(captureUser())
             navigate('/profile')
+            window.location.reload(true)
         } catch (error) {
-            console.log(error)
             toast.error(error.response.data.message, { duration: 1500})
         }
     } 
@@ -49,16 +50,14 @@ return (
             <h4 className="profile-subtitle">Edit Profile</h4>
             <div className="avatar"><img  className="img-photo-edit" src={user.photo} alt="" /></div>
             <div className="input-file-container">
-                <input type="file" name="avatar" id=""/>
+                <input type="file" name="avatar" ref={file} />
             </div>
         </div>
-
-    
         <div className="profile-form">
                 <div className="profile-box">
                     <h4 className="profile-subtitle">Personal information</h4>
                     <div className="input-container">
-                        <input className="input-style" type="email" name="email" placeholder="Ingrese su email" defaultValue={user.email} />
+                        <input className="input-style" type="email" name="email" placeholder="Ingrese su email" defaultValue={user.email} readOnly />
                     </div>
                     <div className="input-container">
                         <input className="input-style" type="text"  defaultValue={user.name}  ref={name}/>
@@ -70,22 +69,6 @@ return (
                         <input className="input-style" type="number" name="dni" placeholder="DNI"/>
                     </div> */}
                 </div>
-                {/* <div className="profile-box">
-                    <h4 className="profile-subtitle">Contact information</h4>
-                        <div className="input-container">
-                            <input className="input-style" type="tel" name="tel" placeholder="phone"/>
-                        </div>
-                        <div className="input-container">
-                            <input className="input-style" type="tel" name="tel" placeholder="phone"/>
-                        </div>
-                        <div className="input-container">
-                            <input className="input-style" type="tel" name="tel" placeholder="phone"/>
-                        </div>
-                
-                        <div className="input-container">
-                            <input className="input-style" type="text" name="domicilio" placeholder="Street and number"/>
-                        </div>
-                </div> */}
             </div>
             <div className="button-container">
                 <button type="submit" className="btn btn-edit" >Send</button>

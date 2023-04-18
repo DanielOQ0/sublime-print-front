@@ -1,0 +1,13 @@
+
+
+.nav-item {
+    margin: 0 .5rem; 
+  }
+  
+  .navbar {
+    box-shadow: 0 0.3rem 0.4rem rgba(0,0,0,0.2);
+  }
+  
+  .btn-light, .btn-warning {
+    box-shadow: 0 0.25rem 0.25rem rgba(0,0,0,0.2);
+  }

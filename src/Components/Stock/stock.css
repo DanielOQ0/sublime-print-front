@@ -1,0 +1,94 @@
+/* Orbitron Font */
+@import 'https://fonts.googleapis.com/css?family=Orbitron:700';
+
+/* BUTTONS */
+
+.btn-simple {
+	border: 0px;
+	border: 3px solid red;
+}
+
+.btn-xs {
+	font-size: 16px;
+	border-radius: 3px;
+	padding: auto;
+	margin: 0.2rem;
+	border: 1px solid grey;
+}
+
+.btn-add{
+	color: white;
+	font-size: 16px;
+	border-radius: 3px;
+	padding: auto;
+	margin: 0.2rem;
+}
+
+
+
+/* Sidebar Classes*/
+.sidebar {
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	padding: 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border-right: 1px solid #eee;
+}
+
+.sidebar {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.sidebar .nav {
+	margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+	width: 100%;
+}
+
+.sidebar .nav-item + .nav-item {
+	margin-left: 0;
+}
+
+.sidebar .nav-link {
+	border-radius: 0;
+}
+
+.table{
+	border: 1px solid lightgray;
+}
+.image{
+	width: 6rem;
+	height: 6rem;
+	object-fit: contain;
+}
+
+.data-product{
+	background-color: white;
+	margin-top: 0rem;
+	font-size: 18px;
+}
+
+.table-text{
+	font-size: 20px;
+}
+
+.xx{
+	background-color: white;
+	color: white;
+	
+}
+
+.btn-delete{
+	border: 1px solid red;
+}
+
+.btn-update{
+	border: 1px solid green;
+}
