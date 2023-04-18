@@ -2,15 +2,21 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './stock2.css'
-import { Link as Anchor } from "react-router-dom";
+import { Link as Anchor, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux';
+import userActions from "../../Store/CaptureUser/actions"
+import { toast } from "react-hot-toast";
 
+const { captureUser } = userActions
 
 export default function Stock() {
 	let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
     const [products, setProducts] = useState([]);
     const [edit, setEdit] = useState({});
+	const dispatch = useDispatch()
+	const navigate = useNavigate()
 
     useEffect(() => { 
         axios.get('http://localhost:8080/api/products', headers)
@@ -78,6 +84,20 @@ export default function Stock() {
             })
 		}	
     };
+	async function handleLogout(){
+		try {
+			let headers = { headers: { Authorization: `Bearer ${token}` } };
+			let url = "http://localhost:8080/api/users/signout";
+			await axios.post(url, "", headers);
+			localStorage.setItem("token", "");
+			localStorage.setItem("user", "");
+			navigate("/")
+			toast.success("Logout successful")
+		  } catch (error) {
+			console.log(error);
+		  }
+		  dispatch(captureUser())
+	  }
 	
   return (
     <div class="body-stock">
@@ -86,8 +106,10 @@ export default function Stock() {
             <h2>ADMIN</h2>
             <ul class="links">
                 
-            <li><p class="active"><Anchor to="/#">Products</Anchor></p></li>
-            <li><p><Anchor to="/#">Home</Anchor></p></li>
+            <li><p class="active"><Anchor to="/admin/panel/stock">Products stock</Anchor></p></li>
+            <li><p><Anchor to="/admin/new-product">New Product</Anchor></p></li>
+			<li><p><Anchor to="/admin/orders">Orders</Anchor></p></li>
+			<li><p onClick={handleLogout} className='cursor-pointer'>Logout</p></li>
             </ul>
         </div>
         <div class="content">

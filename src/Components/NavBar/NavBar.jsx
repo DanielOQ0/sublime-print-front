@@ -105,7 +105,7 @@ export default function NavBar() {
           <Anchor to="/colors-textures" className="text-sm font-semibold leading-6 text-gray-900">
             <motion.p     
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}>Colors and Textures
+                whileTap={{ scale: 0.9 }}>Our Works
             </motion.p>
           </Anchor>
           <Anchor to="/contact" className="text-sm font-semibold leading-6 text-gray-900">
@@ -122,8 +122,8 @@ export default function NavBar() {
           </Anchor>
         </Popover.Group>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-3">
-          {!token?<Anchor to="/signup" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
-            Sing up <span aria-hidden="true">&rarr;</span>
+          {!token?<Anchor to="/login" className="text-sm font-semibold leading-6 text-gray-900 flex items-center mr-5">
+            Login <span aria-hidden="true">&rarr;</span>
           </Anchor>:<>
           <Cart cla="flex items-center justify-center py-8"/> <ProfileInfo/></>}
         </div>
@@ -189,7 +189,7 @@ export default function NavBar() {
                   href="/colors-textures"
                   className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                 >
-                  Colors and Textures
+                  Our Works
                 </Anchor>
                 <Anchor
                   href="/contact"

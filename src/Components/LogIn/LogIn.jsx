@@ -38,12 +38,19 @@ export default function LogIn() {
                   photo: res.data.user.photo,
                   user_id: res.data.user._id
                 })
-              )})
-            dispatch(captureUser())
-            toast.success('Loging In',{ duration: 1500})
-            setTimeout(() => {
-                navigate('/')
-            }, 2000)
+              )
+              dispatch(captureUser())
+              toast.success('Loging In',{ duration: 1500})
+              if( res.data.user.is_admin){
+                  setTimeout(() => {
+                      navigate('/admin/panel/stock')
+                  }, 1000)
+              }else{
+                  setTimeout(() => {
+                      navigate('/')
+                  }, 1000)
+              }
+            })
         } catch (error) {
             toast.error(error.response.data.message)    
         }
