@@ -2,8 +2,8 @@ import React from 'react'
 import './prueba3.css'
 //import logo from '../../Media/logo.png'
 //<img className="logo"src={logo} alt="" />
-import image1 from '../../Media/compra-desde-casa.jpg'
-import image2 from '../../Media/Repartidor-con-cajas.jpg'
+//import image1 from '../../Media/compra-desde-casa.jpg'
+//import image2 from '../../Media/Repartidor-con-cajas.jpg'
 
 export default function Prueba3() {
   return (
@@ -56,22 +56,3 @@ export default function Prueba3() {
     
   )
 }
-
-/* 
- <img src={image1} className='image-company-2'/>
- <img src={image1} className='image-company-2'/>
-
- <img src={image1} className='image-company-2'/>
- <img src={image2} alt=""/>
- https://www.altamirahrm.com/wp-content/uploads/2021/09/Sistemi-di-timbratura.jpg
-
- https://thelogisticsworld.com/wp-content/uploads/2022/07/Repartidor-con-cajas-de-carton-e1662733205119.jpg
-
- <img src="https://thelogisticsworld.com/wp-content/uploads/2022/07/Repartidor-con-cajas-de-carton-e1662733205119.jpg" alt="" />
-
-FREE SHIPPING AND RETURNS
-We are a 100% online company that entrusts its products to DHL Mail.
-                Customers from all over Latin America receive our products in their homes.
-                Shipping is free for all our customers, although they can also pick it up at our offices.
-                But that's not all: the company also offers free returns.
-*/

@@ -4,10 +4,11 @@
     align-items: center;
 }
 
-h1 {
+.h1-newProduct {
     text-align: center;
     font-size: x-large;
     font-weight: 500;
+
 }
 
 .border-b {
@@ -21,12 +22,14 @@ h1 {
     gap: 8rem;
 }
 
-button{
+
+
+.boton-save-newProduct {
     padding: 1rem;
-    font-weight: 500;
+    font-weight: 600;
+
 }
 
-button:hover {
+.boton-save-newProduct:hover {
     background-color: rgba(0, 119, 255, 0.281);
 }
-

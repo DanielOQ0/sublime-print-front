@@ -17,6 +17,5 @@ export const store = configureStore({
     mercadopago: checkoutMP,
     user: userReducer,
     categories: getCategoriesReducer
-
   },
 });

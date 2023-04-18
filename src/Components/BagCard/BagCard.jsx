@@ -1,4 +1,5 @@
 import { TrashIcon } from '@heroicons/react/24/outline';
+import './BagCard.css'
 import axios from 'axios';
 import React from 'react'
 import { toast } from 'react-hot-toast';
@@ -15,8 +16,31 @@ export default function BagCard({product}) {
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
     let option = []
+    let classCustom =""
     for(let i = 0; i < product.product_id.stock; i++) {
         option.push({value:i+1})
+    }
+    let bagColor
+    let bgColor = [
+        { label: "White", image : require('../../Media/custom-color-white.png'), bgImage: require('../../Media/custom-shirt-white.png')},
+        { label: "Black", image : require('../../Media/custom-color-black.png'), bgImage: require('../../Media/custom-shirt-black.png')},
+        { label: "Gray", image : require('../../Media/custom-color-gray.png'), bgImage: require('../../Media/custom-shirt-gray.png')},
+        { label: "Anthracite", image : require('../../Media/custom-color-anthracite.png'), bgImage: require('../../Media/custom-shirt-anthracite.png')},
+        { label: "Blue", image : require('../../Media/custom-color-blue.png'), bgImage: require('../../Media/custom-shirt-blue.png')},
+        { label: "Brown", image : require('../../Media/custom-color-brown.png'), bgImage: require('../../Media/custom-shirt-brown.png')},
+        { label: "Green", image : require('../../Media/custom-color-green.png'), bgImage: require('../../Media/custom-shirt-green.png')},
+        { label: "Orange", image : require('../../Media/custom-color-orange.png'), bgImage: require('../../Media/custom-shirt-orange.png')},
+        { label: "Red", image : require('../../Media/custom-color-red.png'), bgImage: require('../../Media/custom-shirt-red.png')},
+        { label: "Skyblue", image : require('../../Media/custom-color-skyblue.png'), bgImage: require('../../Media/custom-shirt-skyblue.png')},
+        { label: "Yellow", image : require('../../Media/custom-color-yellow.png'), bgImage: require('../../Media/custom-shirt-yellow.png')},
+      ]
+    if(product.product_id.name==="Custom Shirt"){
+        bgColor.forEach((each)=>{
+            if(each.label===product.color){
+                bagColor=each.bgImage
+            }
+        })
+        classCustom="p-6"
     }
     
     async function handleQuantity(e){
@@ -49,8 +73,8 @@ export default function BagCard({product}) {
   return (
     <div key={product._id}>
         <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
-            <div className="w-1/4">
-                <img src={product.product_id.image} className="w-full h-full object-center object-cover" />
+            <div className="w-1/4 bag-div-card" style={{backgroundImage : `url(${bagColor})`, backgroundSize:"cover", backgroundRepeat: "no-repeat", backgroundPosition: "center"}}>
+                <img src={product.product_id.image} className={`object-center object-cover ${classCustom}`} />
             </div>
             <div className="md:pl-3 md:w-3/4">
                 <div className="flex items-center justify-between w-full pt-1">

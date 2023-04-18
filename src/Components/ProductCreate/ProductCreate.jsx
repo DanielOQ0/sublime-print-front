@@ -20,7 +20,7 @@ export default function ProductCreate() {
     e.preventDefault();
     let url = 'http://localhost:8080/api/products'
     let formData = new FormData(formRef.current);
-
+    console.log(formData);
     let data = {
       name: formData.get("name"),
       description: formData.get("description"),
