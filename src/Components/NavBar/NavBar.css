@@ -9,3 +9,6 @@
     background: rgb(228,241,245);
     background: linear-gradient(180deg, rgba(228,241,245,1) 0%, rgba(255,255,255,1) 100%);
 }
+.anchors-navbar{
+    text-decoration: none;
+}

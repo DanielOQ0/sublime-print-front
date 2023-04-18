@@ -24,22 +24,25 @@ function Cart({cla}) {
     let summary= useSelector(store=>store.price)
     let token = localStorage.getItem("token")
     let headers = { headers: { Authorization: `Bearer ${token}` } };
+    let productsIds
+    let productsNames 
+    let payments
 
-    let productsIds = products.map((e) => {
+    if(products.length!=0){
+        productsIds = products.map((e) => {
         return e._id
-    })
-
-    let productsNames = products.map((e) => {
-        return e.product_id.name
-    })
-    // console.log(productsNames)
-    const payments = 
+        })
+        productsNames = products.map((e) => {
+            return e.product_id.name
+        })
+        payments = 
         {
             id : productsIds.join(),
             name : productsNames.join(),
             currency_id: "ARS",
             price: summary.total,
         }
+    }
 
     function handlePayments() {
         axios.post('http://localhost:8080/api/payments',payments, headers)
@@ -94,7 +97,7 @@ function Cart({cla}) {
                                 <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Bag</p>
                                 {isLoading? <div className="spinner-container-cart"><LoadingSpinner size={"normal"}/></div>:
                                     products.length!=0 ?
-                                    products.map((each)=>{
+                                    products?.map((each)=>{
                                         return  <BagCard product={each}/>
                                     }):
                                 <div className="container-empty-cart"><ArchiveBoxXMarkIcon className="w-12 h-12"/><p>BAG EMPTY</p></div>
@@ -122,7 +125,7 @@ function Cart({cla}) {
                                             <p className="text-2xl leading-normal text-gray-800">Total</p>
                                             <p className="text-2xl font-bold leading-normal text-right text-gray-800">$ {summary.total}</p>
                                         </div>
-                                        <button onClick={handlePayments}
+                                        <button onClick={handlePayments} disabled={products.length===0}
                                                              className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 Go pay
                                         </button>
