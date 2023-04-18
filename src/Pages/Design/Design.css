@@ -1,100 +1,19 @@
-.container-design{
+.container-selector-design{
     height: 75vh;
     background-color: rgb(230, 230, 230);
     display: flex;
-}
-.container-tools-design{
-    height: 100%;
-    width: 40%;
-    overflow: hidden; /*overlay*/
-    display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     gap: 20px;
 }
-.container-canva{
-    height: 100%;
-    width: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0px 0px 15px 3px rgba(0,0,0,0.1);
+.title-selector-design{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 60px;
 }
-.container-properties{
-    width: 90%;
-    height: 70%;
-    background-color: white;
-    overflow: auto; /*overlay*/
-    padding: 10px;
-}
-.container-product-canva{
-    height: 100%;
-    width: 80vw;
-    max-width: 600px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
-}
-/* estilos colores */
-.container-label-selected{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    border: 1px solid rgb(0, 164, 205);
-}
-.container-label-deselected{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-}
-.bubble-lavel{
-    width: 35px;
-    height: 35px;
-    border-radius: 35px;
-    background-size:contain;
-    margin: 0;
-}
-/* estilos imagenes cargadas */
-.container-image-selected{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
+.container-shirt-selector{
+    width: 150px;
+    height: 150px;
+    border: 2px solid  gray;
     border-radius: 5px;
-    border: 2px solid rgb(0, 164, 205);
-}
-.container-image-deselected{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 5px;
-}
-.image-label{
-    width: 55px;
-    height: 55px;
-    border-radius: 5px;
-    background-size:contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-.container-tools-design-bottom{
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-}
-.container-tools-design-top{
-    width: 90%;
 }

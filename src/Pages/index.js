@@ -16,6 +16,7 @@ import Design from "./Design/Design";
 import AddressForm from "../Components/AddressForm/AddressForm";
 import NewProductForm from "../Components/NewProductForm/NewProductForm";
 import AdminPanel from "./AdminPanel/AdminPanel";
+import DesignShirt from "./DesignShirt/DesignShirt";
 
 
 
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
       {path: "/profile", element: <Profile/>},
       {path: "/profile-edit", element: <ProfileEdit/>},
       {path: "/design", element: <Design/>},
+      {path: "/design/shirt", element: <DesignShirt/>},
       {path: "/address-form", element: <AddressForm/>},
       {path: "/new-product", element: <NewProductForm/> },
       {path: "/*",element: <NotFound />,},
