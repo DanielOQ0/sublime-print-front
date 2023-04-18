@@ -1,18 +1,10 @@
 import React from 'react'
-import Muestras from '../../Components/ColorsTextures/Muestras'
+import Muestras4 from '../../Components/ColorsTextures/Muestras4'
 
 export default function ColorsTextures() {
   return (
     <div>
-      <Muestras />
-    {/*   <Prueba4 /> */}
-      {/*   <Colors /> */}
-       {/*  <Colors2 /> */}
-       {/*  <FabricTypes /> */}
-        {/* <FullPrint /> */}
-       {/*  <Texto /> */}
-
-       
+      <Muestras4 />      
     </div>
   )
 }
