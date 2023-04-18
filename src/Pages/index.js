@@ -24,8 +24,8 @@ export const router = createBrowserRouter([
     path: "/admin",element: <AdminLayout />,
     children: [
       {path: "/admin/panel/stock",element: <AdminPanel />,},
-     /*  {path: "/admin/panel/new",element: <p>new product</p>,}, */
-
+      {path: "/admin/new-product", element: <NewProductForm/> },
+      {path: "/admin/*",element: <NotFound />,},
     ],
   },
   {
@@ -42,7 +42,6 @@ export const router = createBrowserRouter([
       {path: "/design", element: <Design/>},
       {path: "/design/shirt", element: <DesignShirt/>},
       {path: "/address-form", element: <AddressForm/>},
-      {path: "/new-product", element: <NewProductForm/> },
       {path: "/*",element: <NotFound />,},
       
     ],
